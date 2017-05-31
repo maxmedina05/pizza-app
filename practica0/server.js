@@ -1,3 +1,7 @@
+/**
+ * Programador: Max Medina
+ * Codigo extraido de https://nodejs.org/docs/latest-v0.12.x/api/net.html#net_event_data
+ */
 var net = require('net');
 
 var server = net.createServer(function(socket) {
