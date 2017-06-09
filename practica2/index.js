@@ -1,16 +1,18 @@
-const express = require('express')
-const helpers = require('./lib/helpers');
+const express = require('express');
+const helpers = require(__dirname + '/lib/helpers');
 const exphbs = require('express-handlebars');
 
-const app = express()
+const PORT = 5099;
+
+const app = express();
 
 app.use('/static', express.static('public'));
 
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
     extname: '.hbs',
-    layoutsDir: 'views/layouts/',
-    partialsDir: 'views/partials/',
+    layoutsDir: __dirname + '/views/layouts/',
+    partialsDir: __dirname + '/views/partials/',
     helpers: helpers
   }
 ));
@@ -25,6 +27,6 @@ app.get('/about', function (req, res) {
 });
 
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(PORT, function () {
+  console.log('Example app listening on port ', PORT);
 });
