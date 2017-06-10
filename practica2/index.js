@@ -6,7 +6,7 @@ const PORT = 5099;
 
 const app = express();
 
-app.use('/static', express.static('public'));
+app.use('/static', express.static(__dirname + '/public'));
 
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
