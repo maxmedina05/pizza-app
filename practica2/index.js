@@ -6,7 +6,7 @@ const PORT = 5099;
 
 const app = express();
 
-app.use('/static', express.static(__dirname + '/public'));
+app.use('/max/static', express.static(__dirname + '/public'));
 
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
@@ -18,15 +18,33 @@ app.engine('.hbs', exphbs({
 ));
 app.set('view engine', '.hbs');
 
-app.get('/', function (req, res) {
+app.use(function(req, res, next) {
+    let obj = {};
+    obj.path = req.path
+    obj.method = req.method
+    obj.headers = req.headers
+    obj.body = req.body
+    obj.files = req.files
+    obj.text = req.text
+    obj.params = req.params
+    obj.query = req.query
+    console.log(obj);
+    next();
+});
+
+app.get('/max', function (req, res) {
     res.render('home');
 });
 
-app.get('/about', function (req, res) {
+app.get('/max/about', function (req, res) {
     res.render('about');
 });
 
-
+/*
+app.get('/max', function(req, res) {
+	res.send('hello');
+});
+*/
 app.listen(PORT, function () {
   console.log('Example app listening on port ', PORT);
 });
