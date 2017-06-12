@@ -40,11 +40,6 @@ app.get('/max/about', function (req, res) {
     res.render('about');
 });
 
-/*
-app.get('/max', function(req, res) {
-	res.send('hello');
-});
-*/
 app.listen(PORT, function () {
   console.log('Example app listening on port ', PORT);
 });
