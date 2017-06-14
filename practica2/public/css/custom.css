@@ -81,4 +81,8 @@
   .footer ul > li {
     float: none;
   }
+
+  .footer ul > li {
+    display: block;
+  }
 }
