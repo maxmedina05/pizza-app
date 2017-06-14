@@ -6,7 +6,7 @@ const PORT = 5099;
 
 const app = express();
 
-app.use('/max/static', express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/public'));
 
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
@@ -32,11 +32,11 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/max', function (req, res) {
+app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/max/about', function (req, res) {
+app.get('/about', function (req, res) {
     res.render('about');
 });
 
