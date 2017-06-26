@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require("path");
 const helpers = require(__dirname + '/lib/helpers');
 const exphbs = require('express-handlebars');
 
@@ -39,6 +40,14 @@ app.get('/', function (req, res) {
 app.get('/about', function (req, res) {
     res.render('about');
 });
+
+app.get('/jsplay', function (req, res) {
+    res.render('jsplay');
+});
+
+// app.get('/jsplay.html', function (req, res) {
+//     res.sendFile(path.join(__dirname + '/views/jsplay.html');
+// });
 
 app.listen(PORT, function () {
   console.log('Example app listening on port ', PORT);
