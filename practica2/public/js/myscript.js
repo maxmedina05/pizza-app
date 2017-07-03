@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function fixBottom(){
     var footer = document.getElementsByClassName('footer')[0];
-    footer.classList.remove('footer');
-    footer.classList.add('footer');
+    footer.style.position = "initial";
   }
 });
