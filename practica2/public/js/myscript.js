@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       if(l.childElementCount == 0)
         addLeaf(container, l);
       else {
-        var containerId = addTree(container, l);
+        var containerId = addCTree(container, l);
       }
 
       for(var i = 0; i < l.childElementCount; i++) {
@@ -34,16 +34,49 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
   }
 
+  function addCTree(container, node) {
+    var isRoot = node.parentNode == null;
+    var name = (isRoot) ? 'ROOT' : node.tagName;
+
+    var ul = document.createElement('ul');
+    var span = document.createElement('span');
+
+    var id = "container" + cnt++;
+    ul.className = "node-container";
+    span.className = 'x' + name.toLowerCase();
+    ul.setAttribute("id", id);
+    span.innerHTML  = name;
+
+    if (isRoot) {
+      container.appendChild(span);
+      container.appendChild(ul);
+    } else {
+        var li = document.createElement('li');
+        li.appendChild(span);
+        li.appendChild(ul);
+        container.appendChild(li);
+    }
+    // if(isRoot) {
+    //   container.appendChild(span);
+    // } else {
+    //   var li = document.createElement('li');
+    //   li.appendChild(span);
+    //   container.appendChild(li);
+    // }
+    return id;
+  }
+
   function addTree(container, node) {
     var isRoot = node.parentNode == null;
-
     var name = (isRoot) ? 'ROOT' : node.tagName;
 
     var span = document.createElement('span');
+
     var ul = document.createElement('ul');
     var id = "container" + cnt++;
 
-    span.innerHTML = '<span>'+ name + '</span>';
+    span.innerHTML = '<span class="' + 'x' + name.toLowerCase() + '">'+ name + '</span>';
+    ul.className = "node-container";
     ul.setAttribute("id", id);
     span.appendChild(ul);
 
@@ -59,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function addLeaf(container, node){
     var li = document.createElement('li');
-    li.innerHTML = '<span>'+ node.tagName + '</span>';
+    li.innerHTML = '<span class="'  + 'x' + node.tagName.toLowerCase() + '">'+ node.tagName + '</span>';
     container.appendChild(li);
   }
 
@@ -67,4 +100,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var footer = document.getElementsByClassName('footer')[0];
     footer.style.position = "initial";
   }
+
 });
