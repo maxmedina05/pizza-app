@@ -45,9 +45,20 @@ app.get('/jsplay', function (req, res) {
     res.render('jsplay');
 });
 
-// app.get('/jsplay.html', function (req, res) {
-//     res.sendFile(path.join(__dirname + '/views/jsplay.html');
-// });
+app.get('/ingredients', function(req, res) {
+  const ingredients = [
+    {name: 'Sugar'},
+    {name: 'Soybean'},
+    {name: 'Egg'},
+    {name: 'Wheat'},
+    {name: 'Butter'},
+    {name: 'Rice'},
+    {name: 'Honey'},
+    {name: 'Flour'},
+  ];
+
+  res.json(ingredients);
+});
 
 app.listen(PORT, function () {
   console.log('Example app listening on port ', PORT);
