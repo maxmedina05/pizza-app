@@ -2,11 +2,14 @@ const express = require('express');
 const path = require("path");
 const helpers = require(__dirname + '/lib/helpers');
 const exphbs = require('express-handlebars');
+const mongoose = require('mongoose');
+const config = require('./config/config.env');
 
+const Ingredient = require('./models/ingredient.model');
 const PORT = 5099;
 
 const app = express();
-
+mongoose.connect(config.db);
 app.use('/static', express.static(__dirname + '/public'));
 
 app.engine('.hbs', exphbs({
@@ -29,7 +32,7 @@ app.use(function(req, res, next) {
     obj.text = req.text
     obj.params = req.params
     obj.query = req.query
-    console.log(obj);
+    // console.log(obj);
     next();
 });
 
@@ -58,6 +61,17 @@ app.get('/ingredients', function(req, res) {
   ];
 
   res.json(ingredients);
+});
+
+app.get('/api/ingredients', function(req, res) {
+  Ingredient.find({}, function(err, items){
+
+    if(err) throw err;
+
+    res.json(items);
+  });
+
+  res.send('ok');
 });
 
 app.listen(PORT, function () {
