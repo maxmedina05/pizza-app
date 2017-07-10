@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
 
       httpRequest.onreadystatechange = loadIngredients;
-      httpRequest.open('GET', '/ingredients');
+      httpRequest.open('GET', '/api/ingredients');
       httpRequest.send();
   }
 

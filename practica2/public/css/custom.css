@@ -96,6 +96,10 @@
   list-style: none;
 }
 
+.tree > ul li {
+  margin: 8px 0;
+}
+
 .tree li > span {
   color: #FFF;
   border: 2px groove #000;
@@ -128,8 +132,11 @@
   background-color: #FF5722;
 }
 
-.xnav, .xfooter, .xtbody {
+.xnav, .xfooter {
   background-color: #FFEB3B;
+}
+.xtbody {
+  background-color: #00BCD4;
 }
 
 .xsection {

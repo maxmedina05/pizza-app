@@ -1,15 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const path = require("path");
 const helpers = require(__dirname + '/lib/helpers');
 const exphbs = require('express-handlebars');
-const mongoose = require('mongoose');
-const config = require('./config/config.env');
+const DBHelper = require(__dirname + '/lib/DBHelper');
 
-const Ingredient = require('./models/ingredient.model');
-const PORT = 5099;
-
+const PORT = process.env.PORT;
 const app = express();
-mongoose.connect(config.db);
+const dbHelper = new DBHelper(process.env.DB_CONN_STR);
+
 app.use('/static', express.static(__dirname + '/public'));
 
 app.engine('.hbs', exphbs({
@@ -22,19 +21,19 @@ app.engine('.hbs', exphbs({
 ));
 app.set('view engine', '.hbs');
 
-app.use(function(req, res, next) {
-    let obj = {};
-    obj.path = req.path
-    obj.method = req.method
-    obj.headers = req.headers
-    obj.body = req.body
-    obj.files = req.files
-    obj.text = req.text
-    obj.params = req.params
-    obj.query = req.query
-    // console.log(obj);
-    next();
-});
+// app.use(function(req, res, next) {
+//     let obj = {};
+//     obj.path = req.path
+//     obj.method = req.method
+//     obj.headers = req.headers
+//     obj.body = req.body
+//     obj.files = req.files
+//     obj.text = req.text
+//     obj.params = req.params
+//     obj.query = req.query
+//     // console.log(obj);
+//     next();
+// });
 
 app.get('/', function (req, res) {
     res.render('home');
@@ -64,14 +63,10 @@ app.get('/ingredients', function(req, res) {
 });
 
 app.get('/api/ingredients', function(req, res) {
-  Ingredient.find({}, function(err, items){
-
+  dbHelper.getIngredients(function(err, items){
     if(err) throw err;
-
-    res.json(items);
+    res.json(items)
   });
-
-  res.send('ok');
 });
 
 app.listen(PORT, function () {
