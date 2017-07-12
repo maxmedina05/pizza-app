@@ -3,15 +3,16 @@ var Schema = mongoose.Schema;
 
 var mySchema = new Schema({
   name: String,
+  type: String
 });
 
 var model = mongoose.model('ingredient', mySchema);
 
 const crusts = [
-  { name: 'Thin' },
-  { name: 'Flatbread' },
-  { name: 'Thick' },
-  { name: 'Focaccia' },
+  { name: 'Thin', type:'crust'},
+  { name: 'Flatbread', type:'crust' },
+  { name: 'Thick', type:'crust'},
+  { name: 'Focaccia', type:'crust' }
 ];
 
 const cheeses = [
@@ -20,7 +21,7 @@ const cheeses = [
   { name: 'Provolone' },
   { name: 'Ricotta' },
   { name: 'Fontina' },
-  { name: 'Buffalo mozzarella' },
+  { name: 'Buffalo mozzarella' }
 ];
 
 const sauces = [
@@ -35,7 +36,7 @@ const sauces = [
   { name: 'Carrot-Harissa Sauce' },
   { name: 'Ranch sauce' },
   { name: 'Garlic and Oil' },
-  { name: 'Ricotta Cheese' },
+  { name: 'Ricotta Cheese' }
 ];
 
 const toppings = [
@@ -48,7 +49,7 @@ const toppings = [
   { name: 'Black Olives' },
   { name: 'Green peppers' },
   { name: 'Pineapple' },
-  { name: 'Spinach' },
+  { name: 'Spinach' }
 ];
 
 module.exports = model;

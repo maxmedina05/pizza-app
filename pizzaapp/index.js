@@ -4,6 +4,9 @@ const path = require("path");
 const helpers = require(__dirname + '/lib/helpers');
 const exphbs = require('express-handlebars');
 const DBHelper = require(__dirname + '/lib/db-helper');
+const makePizza = require(__dirname + '/components/make-pizza/make-pizza.router.js');
+
+const APIModule = require(__dirname + '/api/api.module');
 
 const PORT = process.env.PORT;
 const app = express();
@@ -37,31 +40,10 @@ app.set('view engine', '.hbs');
 //     next();
 // });
 
+new APIModule(app);
+
 app.get('/', function (req, res) {
     res.render('home');
-});
-
-app.get('/about', function (req, res) {
-    res.render('about');
-});
-
-app.get('/jsplay', function (req, res) {
-    res.render('jsplay');
-});
-
-app.get('/ingredients', function(req, res) {
-  const ingredients = [
-    {name: 'Sugar'},
-    {name: 'Soybean'},
-    {name: 'Egg'},
-    {name: 'Wheat'},
-    {name: 'Butter'},
-    {name: 'Rice'},
-    {name: 'Honey'},
-    {name: 'Flour'},
-  ];
-
-  res.json(ingredients);
 });
 
 app.get('/api/ingredients', function(req, res) {
@@ -70,6 +52,8 @@ app.get('/api/ingredients', function(req, res) {
     res.json(items)
   });
 });
+
+app.use('/makepizza', makePizza);
 
 app.listen(PORT, function () {
   console.log('Example app listening on port ', PORT);

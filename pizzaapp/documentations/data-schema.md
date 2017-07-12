@@ -7,8 +7,15 @@
 # User Schema - users
   * username: string
   * password: string
-  * orders: order[]
+
+# Pizza Schema - pizzas
+  * crust
+  * topping
+  * sauce
+  * crust
+  * price
 
 # Order Schema - orders
   * status: Delivered | Cancelled | Active
-  * pizza: Pizza
+  * pizza: pizza[]
+  * totalPrice: float
