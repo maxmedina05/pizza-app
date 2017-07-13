@@ -41,3 +41,17 @@ db.ingredients.insert([
   { name: 'Pineapple', type:'topping' },
   { name: 'Spinach', type:'topping' }
 ]);
+
+db.users.insert({
+  email: "admin@example.com",
+  username: 'admin',
+  password: 'admin',
+  role: 'admin'
+  });
+
+  db.users.insert({
+    email: "test@example.com",
+    username: 'test',
+    password: 'test',
+    role: 'guest'
+    });
