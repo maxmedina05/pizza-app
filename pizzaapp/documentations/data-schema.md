@@ -5,6 +5,7 @@
   * crust: [...string]
 
 # User Schema - users
+  * email: string
   * username: string
   * password: string
 
