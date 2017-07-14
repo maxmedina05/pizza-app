@@ -1,11 +1,11 @@
 <h1>Make your own Pizza</h1>
 
-<form class="form-horizontal">
+<form class="form-horizontal" action="/orderconfirmation" method="post">
   <fieldset>
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-size">Select your pizza's size</label>
       <div class="col-md-6">
-        <select id="pizza-size" class="form-control">
+        <select id="pizza-size" name="size" class="form-control">
           <<option>Personal</option>
           <<option>Medium</option>
           <<option>Large</option>
@@ -17,7 +17,7 @@
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-crust">Select your pizza's crust</label>
       <div class="col-md-6">
-        <select id="pizza-crust" class="form-control">
+        <select id="pizza-crust" name="crust" class="form-control">
         </select>
       </div>
     </div>
@@ -25,7 +25,7 @@
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-cheese">Select your pizza's cheese</label>
       <div class="col-md-6">
-        <select id="pizza-cheese" class="form-control">
+        <select id="pizza-cheese" name="cheese" class="form-control">
         </select>
       </div>
     </div>
@@ -33,7 +33,7 @@
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-sauce">Select your pizza's sauce</label>
       <div class="col-md-6">
-        <select id="pizza-sauce" class="form-control">
+        <select id="pizza-sauce" name="sauce" class="form-control">
         </select>
       </div>
     </div>
@@ -41,7 +41,7 @@
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-topping">Select your pizza's topping</label>
       <div class="col-md-6">
-        <select id="pizza-topping" class="form-control">
+        <select id="pizza-topping" name="topping" class="form-control">
         </select>
       </div>
     </div>
@@ -69,7 +69,7 @@
   <div class="form-group">
     <div class="col-lg-10 col-lg-offset-2">
       <button type="reset" class="btn btn-default">Cancel</button>
-      <button type="submit" class="btn btn-primary">Submit Order</button>
+      <button id="btnSubmit" type="submit" class="btn btn-primary">Submit Order</button>
     </div>
   </div>
 </form>

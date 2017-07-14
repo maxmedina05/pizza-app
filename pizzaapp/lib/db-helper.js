@@ -10,7 +10,7 @@ function execute(statement, params, callback) {
         } else {
             statement(params, db, callback);
             db.close();
-            console.log("connection closed!");
+            // console.log("connection closed!");
         }
     });
 }

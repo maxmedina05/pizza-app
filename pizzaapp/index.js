@@ -1,16 +1,20 @@
 require('dotenv').config();
-const express = require('express');
-const path = require("path");
-const helpers = require(__dirname + '/lib/helpers');
-const exphbs = require('express-handlebars');
-const PORT = process.env.PORT;
+const express       = require('express');
+const bodyParser    = require('body-parser');
+const path          = require("path");
+const helpers       = require(__dirname + '/lib/helpers');
+const exphbs        = require('express-handlebars');
+const PORT          = process.env.PORT;
 
 // Custom Components
 const APIModule = require(__dirname + '/api/api.module');
-const makePizza = require(__dirname + '/components/make-pizza/make-pizza.router.js');
-const orderConfirmation = require(__dirname + '/components/order-confirmation/order-confirmation.component');
+const routes    = require(__dirname + '/components/app.routes');
 
 const app = express();
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({
+    extended: true
+})); // for parsing application/x-www-form-urlencoded
 
 app.use('/static', express.static(__dirname + '/public'));
 app.use('/vendors', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
@@ -29,9 +33,8 @@ APIModule(app);
 app.get('/', function (req, res) {
     res.render('home');
 });
-app.use('/makepizza', makePizza);
 
-app.use('/orderconfirmation', orderConfirmation);
+app.use('/', routes);
 
 app.listen(PORT, function () {
   console.log('Example app listening on port ', PORT);

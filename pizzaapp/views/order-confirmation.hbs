@@ -1,1 +1,14 @@
-<h1>Order Confirmation</h1>
+<div>
+  <h1>Order Confirmation</h1>
+
+  <div>Pizza's size: {{order.size}}</div>
+  <div>Pizza's crust: {{order.crust}}</div>
+  <div>Pizza's sauce: {{order.sauce}}</div>
+  <div>Pizza's cheese: {{order.cheese}}</div>
+  <div>Pizza's topping: {{order.topping}}</div>
+
+  <button id="btn-cancel" class="btn btn-danger">Cancel</button>
+  <button id="btn-confirm" class="btn btn-primary">Confirm</button>
+
+</div>
+<script src="/static/js/order-confirmation.controller.js"></script>

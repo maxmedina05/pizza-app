@@ -2,11 +2,19 @@
   'use strict';
 
   document.addEventListener("DOMContentLoaded", function(event) {
+
     function MakePizzaController() {
       var pizzaCrustsSelect = document.getElementById('pizza-crust');
       var pizzaSaucesSelect = document.getElementById('pizza-sauce');
       var pizzaCheesesSelect = document.getElementById('pizza-cheese');
       var pizzaToppingsSelect = document.getElementById('pizza-topping');
+      var btnSubmit = document.getElementById('btnSubmit');
+      btnSubmit.onclick = submitOrder;
+
+      getIngredients('crust');
+      getIngredients('cheese');
+      getIngredients('sauce');
+      getIngredients('topping');
 
       function getIngredients(type) {
         var url = "/api";
@@ -52,14 +60,10 @@
         }
       }
 
-      function submitOrder(order) {
-        
+      function submitOrder() {
+        var order = {};
+        console.log('helllo');
       }
-
-      getIngredients('crust');
-      getIngredients('cheese');
-      getIngredients('sauce');
-      getIngredients('topping');
     }
     MakePizzaController();
   });
