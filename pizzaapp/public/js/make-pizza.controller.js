@@ -9,7 +9,7 @@
             var pizzaCheesesSelect = document.getElementById('pizza-cheese');
             var pizzaToppingsSelect = document.getElementById('pizza-topping');
             var makePizzaForm = document.getElementById('make-pizza-form');
-            makePizzaForm.onsubmit = onsubmitOrder;
+            // makePizzaForm.onsubmit = onsubmitOrder;
 
             getIngredients('crust');
             getIngredients('cheese');

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const DBHelper = require('../lib/db-helper')();
-const LoginController = require('./login.component')();
+const LoginComponent = require('./login.component')();
 
 router.route('/pizza').get(function(req, res) {
   res.render('pizza');
@@ -9,6 +9,14 @@ router.route('/pizza').get(function(req, res) {
 
 router.route('/makepizza').get(function(req, res) {
   res.render('make-pizza');
+});
+
+router.route('/deals').get(function(req, res) {
+  res.render('deals');
+});
+
+router.route('/reorder').get(function(req, res) {
+  res.render('reorder');
 });
 
 router.route('/orderconfirmation').post(function(req, res) {
@@ -31,7 +39,7 @@ router.route('/ordercreated').get(function(req, res) {
   ]);
 });
 
-router.route('/login').get(LoginController.login);
-router.route('/authenticate').post(LoginController.authenticate);
+router.route('/login').get(LoginComponent.login);
+router.route('/authenticate').post(LoginComponent.authenticate);
 
 module.exports = router;

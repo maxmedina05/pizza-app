@@ -31,7 +31,8 @@ app.set('view engine', '.hbs');
 APIModule(app);
 
 app.get('/', function (req, res) {
-    res.render('home');
+    // res.render('home');
+    res.redirect('/pizza');
 });
 
 app.use('/', routes);
