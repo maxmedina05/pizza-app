@@ -1,6 +1,6 @@
 .body {
-  margin-top: 64px;
-  margin-bottom: 32px;
+  /*margin-top: 64px;*/
+  /*margin-bottom: 32px;*/
 }
 
 .thumbnail > img {
@@ -16,4 +16,12 @@ td > .btn {
 .topping {
   cursor: pointer;
   margin-right: 8px;
+}
+
+.hide {
+  display: none;
+}
+
+#topping-container {
+  padding: 8px 0px;
 }

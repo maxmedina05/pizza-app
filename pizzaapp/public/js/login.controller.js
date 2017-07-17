@@ -22,6 +22,8 @@
             Ajax.setAuthorization(response.authorization);
             localStorage.setItem('email', user.email);
             window.location.assign('/');
+          } else {
+            
           }
 
         });

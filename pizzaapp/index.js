@@ -5,7 +5,6 @@ const path          = require("path");
 const helpers       = require(__dirname + '/lib/helpers');
 const exphbs        = require('express-handlebars');
 const PORT          = process.env.PORT;
-
 // Custom Components
 const APIModule = require(__dirname + '/api/api.module');
 const routes    = require(__dirname + '/components/app.routes');
@@ -26,12 +25,9 @@ app.engine('.hbs', exphbs({
     helpers: helpers
   }
 ));
-app.set('view engine', '.hbs');
-
 APIModule(app);
-
+app.set('view engine', '.hbs');
 app.get('/', function (req, res) {
-    // res.render('home');
     res.redirect('/pizza');
 });
 

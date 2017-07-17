@@ -6,10 +6,11 @@
     }
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        // TODO: Remove this
         var self = this;
+        // TODO: Remove this
         console.log("Re-Order Controller loaded!");
         var table = document.getElementById('reorder-table');
+        var form  = document.getElementById('reorder-form');
         var orders = [];
 
         Ajax.get('/api/orders', {
@@ -32,11 +33,11 @@
             var btnCancel = document.createElement('button');
             var td = document.createElement('td');
 
-            btnOrder.innerHTML = 'Order again';
-            btnCancel.innerHTML = 'Cancel';
-            btnOrder.className = 'btn btn-warning';
-            btnCancel.className = 'btn btn-danger';
-            btnCancel.onclick = onOrderNowClick;
+            btnOrder.innerHTML    = 'Order again';
+            btnOrder.className    = 'btn btn-warning';
+            btnOrder.onclick      = onOrderNowClick;
+            btnCancel.innerHTML   = 'Cancel';
+            btnCancel.className   = 'btn btn-danger';
             td.appendChild(btnOrder);
             td.appendChild(btnCancel);
 
@@ -54,14 +55,21 @@
                     price: order.price,
                 };
 
-                // console.log(postOrder);
-                Ajax.post('/api/orders', postOrder, function(res) {
-                    if (res.success) {
-                        window.location.assign('/ordercreated');
-                    } else {
-                        window.location.assign('/login');
-                    }
-                });
+                form.reset();
+                form.setAttribute('method', 'POST');
+                form.setAttribute('action', '/orderconfirmation');
+
+                for(var key in postOrder) {
+                  if(postOrder.hasOwnProperty(key)) {
+                    var field = document.createElement('input');
+                    field.setAttribute('type', 'hidden');
+                    field.setAttribute('name', key);
+                    field.setAttribute('value', postOrder[key]);
+                    form.appendChild(field);
+                  }
+                }
+
+                form.submit();
             }
         }
     });

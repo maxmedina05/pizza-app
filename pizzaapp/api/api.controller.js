@@ -44,7 +44,7 @@ module.exports = function APIController() {
             var order = {};
             var ingredients = {
               crust: req.body.crust,
-              toppings: req.body.toppings,
+              toppings: req.body.toppings.split(','),
               sauce: req.body.sauce,
               cheese: req.body.cheese
             };
