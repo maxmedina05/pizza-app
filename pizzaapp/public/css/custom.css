@@ -1,0 +1,10 @@
+.body {
+  margin-top: 64px;
+  margin-bottom: 32px;
+}
+
+.thumbnail > img {
+  height: 200px;
+  width: 100%;
+  display: block;
+}

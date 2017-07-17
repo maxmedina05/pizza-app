@@ -1,6 +1,10 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
+const ORDER = "orders";
+const user  = "users";
+const OFFER = "offers";
+
 function execute(statement, params, callback) {
     MongoClient.connect(process.env.DB_CONN_STR, function(err, db) {
         // assert.equal(null, err);
@@ -25,7 +29,7 @@ function getIngredients(type, db, callback) {
 
 function getUser(user, db, callback) {
     db.collection('users').findOne({
-            username: user.username
+            email: user.email
         },
         function(err, data) {
             callback(err, data);
@@ -33,9 +37,28 @@ function getUser(user, db, callback) {
     );
 }
 
+function addOrder(order, db, callback) {
+    db.collection(ORDER).insertOne(order, function(err, result) {
+        callback(err, result);
+    });
+}
+
+function getOrders(query, db, callback) {
+  db.collection(ORDER).find(query).toArray(function(err, data) {
+      callback(err, data);
+  });
+}
+
+function getOffers(query, db, callback) {
+  db.collection(OFFER).find(query).toArray(function(err, data) {
+      callback(err, data);
+  });
+}
+
 module.exports = function DBHelper() {
 
     return {
+        // Ingredients
         getCrusts: function(callback) {
             execute(getIngredients, 'crust', callback);
         },
@@ -48,6 +71,21 @@ module.exports = function DBHelper() {
         getCheeses: function(callback) {
             execute(getIngredients, 'cheese', callback);
         },
+
+        // Order
+        addOrder: function(order, callback) {
+          execute(addOrder, order, callback);
+        },
+        getOrders: function(callback) {
+          execute(getOrders, {}, callback);
+        },
+
+        // Offer
+        getOffers: function(callback) {
+          execute(getOffers, {}, callback);
+        },
+
+        // Users
         getUser: function(user, callback) {
             execute(getUser, user, callback);
         }

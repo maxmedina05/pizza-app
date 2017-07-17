@@ -1,6 +1,6 @@
 <h1>Make your own Pizza</h1>
 
-<form class="form-horizontal" action="/orderconfirmation" method="post">
+<form class="form-horizontal" action="/api/orders" method="post" id="make-pizza-form">
   <fieldset>
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-size">Select your pizza's size</label>
@@ -41,7 +41,7 @@
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-topping">Select your pizza's topping</label>
       <div class="col-md-6">
-        <select id="pizza-topping" name="topping" class="form-control">
+        <select id="pizza-topping" name="topping" class="form-control" multiple>
         </select>
       </div>
     </div>

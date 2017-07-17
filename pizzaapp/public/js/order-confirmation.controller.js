@@ -12,7 +12,8 @@
 
       function confirmOrder() {
         console.log('submit order');
-        location.assign('/ordercreated');
+        
+        // location.assign('/ordercreated');
       }
 
       function cancelOrder() {
