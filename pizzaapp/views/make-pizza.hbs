@@ -41,14 +41,17 @@
     <div class="form-group">
       <label class="col-md-6 control-label" for="pizza-topping">Select your pizza's topping</label>
       <div class="col-md-6">
-        <select id="pizza-topping" name="topping" class="form-control" multiple>
+        <select id="pizza-topping" class="form-control">
         </select>
+        <input type="hidden" id="toppings" name="toppings" />
+        <div id="topping-container">
+        </div>
+
       </div>
     </div>
   </fieldset>
 
   <!-- <fieldset>
-
     <legend>Personal Info</legend>
 
     <div class="form-group">

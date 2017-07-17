@@ -23,10 +23,11 @@ router.route('/orderconfirmation').post(function(req, res) {
   var order = {};
   order.size = req.body.size;
   order.crust = req.body.crust;
-  order.topping = req.body.topping;
+  order.toppings = req.body.toppings;
   order.sauce = req.body.sauce;
   order.cheese = req.body.cheese;
 
+  console.log(order);
   res.render('order-confirmation', {
     order: order
   });

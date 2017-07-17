@@ -2,14 +2,17 @@
     'use strict';
 
     document.addEventListener("DOMContentLoaded", function(event) {
-
         function MakePizzaController() {
+            var self = this;
             var pizzaCrustsSelect = document.getElementById('pizza-crust');
             var pizzaSaucesSelect = document.getElementById('pizza-sauce');
             var pizzaCheesesSelect = document.getElementById('pizza-cheese');
             var pizzaToppingsSelect = document.getElementById('pizza-topping');
             var makePizzaForm = document.getElementById('make-pizza-form');
-            // makePizzaForm.onsubmit = onsubmitOrder;
+            var toppingContainer = document.getElementById('topping-container');
+            var toppings = [];
+            makePizzaForm.onsubmit = onsubmitOrder;
+            pizzaToppingsSelect.onchange = onToppingSelect;
 
             getIngredients('crust');
             getIngredients('cheese');
@@ -41,6 +44,8 @@
                             break;
                         case 'topping':
                             fillIngredients(pizzaToppingsSelect, ingredients);
+                            addToppingTag(toppingContainer, ingredients[0]["name"]);
+                            addToppingTag(toppingContainer, ingredients[1]["name"]);
                             break;
                         case 'sauce':
                             fillIngredients(pizzaSaucesSelect, ingredients);
@@ -54,29 +59,45 @@
 
             function fillIngredients(container, ingredients) {
                 for (var i = 0; i < ingredients.length; i++) {
-                    var item = document.createElement('option');
-                    item.innerHTML = ingredients[i]["name"];
-                    container.appendChild(item);
+                    addNewOption(container, ingredients[i]["name"]);
                 }
             }
 
-            function onsubmitOrder(evt) {
-                evt.preventDefault();
-                var order = {
-                  size: document.getElementById('pizza-size').value,
-                  crust: document.getElementById('pizza-crust').value,
-                  sauce: document.getElementById('pizza-sauce').value,
-                  cheese: document.getElementById('pizza-cheese').value,
-                  topping: document.getElementById('pizza-topping').value
-                };
+            function addNewOption(container, value) {
+              var option = document.createElement('option');
+              option.innerHTML = value;
+              option.setAttribute('value', value);
+              option.setAttribute('id', value);
+              container.appendChild(option);
+            }
 
-                Ajax.post('/api/orders', order, function(res) {
-                  if(res.success) {
-                    window.location.assign('/ordercreated');
-                  } else {
-                    window.location.assign('/login');
-                  }
-                });
+            function addToppingTag(container, value) {
+              document.getElementById(value).remove();
+              var span = document.createElement('span');
+              span.className = 'label label-info topping';
+              span.innerHTML = '<span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>' + value;
+              container.appendChild(span);
+
+              toppings.push(value);
+
+              //on x click
+              span.onclick = function() {
+                addNewOption(pizzaToppingsSelect, value);
+                toppings.splice(toppings.indexOf(value), 1);
+                span.remove();
+              };
+            }
+
+            function onsubmitOrder(evt) {
+                var toppingField = document.getElementById('toppings');
+                toppingField.setAttribute('value', toppings.join());
+                return true;
+                // evt.preventDefault();
+            }
+
+            function onToppingSelect(evt) {
+              var topping = evt.target.value;
+              addToppingTag(toppingContainer, topping);
             }
         }
         MakePizzaController();

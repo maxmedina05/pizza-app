@@ -44,6 +44,7 @@ Ajax = {
         if(authorization) {
           xhr.setRequestHeader("Authorization", authorization);
         }
+        // console.log(Ajax.buildHttpParams(params));
         xhr.send(Ajax.buildHttpParams(params));
     },
     setAuthorization: function(authorization) {

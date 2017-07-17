@@ -1,4 +1,5 @@
 const DBHelper = require('../lib/db-helper')();
+const Pizza = require('../models/pizza.model');
 
 module.exports = function APIController() {
 
@@ -38,16 +39,19 @@ module.exports = function APIController() {
     }
 
     function addOrder(req, res) {
-        var order = {};
         var auth = req.get('Authorization');
-
         if (isUserAuthenticated(auth)) {
-            order.size = req.body.size;
-            order.crust = req.body.crust;
-            order.topping = req.body.topping;
-            order.sauce = req.body.sauce;
-            order.cheese = req.body.cheese;
+            var order = {};
+            var ingredients = {
+              crust: req.body.crust,
+              toppings: req.body.toppings,
+              sauce: req.body.sauce,
+              cheese: req.body.cheese
+            };
+            order.pizza = new Pizza(req.body.size, ingredients);
+            order.price = req.body.price;
             order.email = getUserEmail(auth);
+            order.status = 'active';
 
             DBHelper.addOrder(order, function(err, result) {
                 if (result.insertedCount === 1) {
@@ -61,7 +65,7 @@ module.exports = function APIController() {
         } else {
             res.json({
               failed: 'failed',
-              errorMessage: 'User is not authenticated'
+              errorMessage: 'User was not authenticated'
             });
         }
     }

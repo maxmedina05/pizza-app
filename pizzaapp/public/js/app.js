@@ -6,8 +6,10 @@
     var btnLogout = document.getElementById('btn-logout');
     btnLogout.onclick = logout;
 
-    function logout(){
+    function logout(evt){
+      evt.preventDefault();
       localStorage.removeItem('authorization');
+      localStorage.removeItem('email');
     }
   });
 })();

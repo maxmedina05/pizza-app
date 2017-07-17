@@ -8,3 +8,12 @@
   width: 100%;
   display: block;
 }
+
+td > .btn {
+  margin-right: 8px;
+}
+
+.topping {
+  cursor: pointer;
+  margin-right: 8px;
+}
