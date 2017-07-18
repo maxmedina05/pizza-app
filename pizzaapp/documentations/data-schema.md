@@ -1,4 +1,5 @@
 # User Schema - users
+  * name: string
   * email: string
   * password: string
 
@@ -16,6 +17,8 @@
   * pizza: pizza
   * email: string
   * totalPrice: float
+  * cancellable: boolean
+  * created: date
   * status: Delivered | Cancelled | Active
 
 # Offer - offers

@@ -9,6 +9,7 @@
         var self = this;
         // TODO: Remove this
         console.log("Re-Order Controller loaded!");
+
         var table = document.getElementById('reorder-table');
         var form  = document.getElementById('reorder-form');
         var orders = [];
@@ -36,10 +37,15 @@
             btnOrder.innerHTML    = 'Order again';
             btnOrder.className    = 'btn btn-warning';
             btnOrder.onclick      = onOrderNowClick;
+
             btnCancel.innerHTML   = 'Cancel';
             btnCancel.className   = 'btn btn-danger';
+            btnCancel.onclick     = onCancelOrder;
+
             td.appendChild(btnOrder);
-            td.appendChild(btnCancel);
+            if(order.status === 'active') {
+              td.appendChild(btnCancel);
+            }
 
             row.innerHTML += title + price + status;
             row.appendChild(td);
@@ -70,6 +76,17 @@
                 }
 
                 form.submit();
+            }
+
+            function onCancelOrder() {
+              var orderId = order._id;
+              Ajax.delete('/api/orders/' + orderId, function(response) {
+                if(response.error) {
+                  // TODO: handle onCancelOrder error
+                } else {
+                  location.reload();
+                }
+              });
             }
         }
     });

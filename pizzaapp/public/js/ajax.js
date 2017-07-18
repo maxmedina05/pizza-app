@@ -47,10 +47,29 @@ Ajax = {
         // console.log(Ajax.buildHttpParams(params));
         xhr.send(Ajax.buildHttpParams(params));
     },
+    delete: function(url, callback) {
+        var xhr = new XMLHttpRequest();
+        var method = 'DELETE';
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+            }
+        };
+        xhr.open(method, url, true);
+        var authorization = Ajax.getAuthorization();
+        if(authorization) {
+          xhr.setRequestHeader("Authorization", authorization);
+        }
+        xhr.send();
+    },
     setAuthorization: function(authorization) {
       localStorage.setItem('authorization', authorization);
     },
     getAuthorization: function(){
-      return localStorage.getItem('authorization');
+      return 'Basic ' + localStorage.getItem('authorization');
+    },
+    removeAuthrization: function(){
+      localStorage.removeItem('authorization');
     }
 };

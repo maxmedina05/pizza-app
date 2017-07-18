@@ -62,14 +62,6 @@
               }
 
               form.submit();
-                // // console.log(postOrder);
-                // Ajax.post('/api/orders', postOrder, function(res) {
-                //     if (res.success) {
-                //         window.location.assign('/ordercreated');
-                //     } else {
-                //         window.location.assign('/login');
-                //     }
-                // });
             }
         }
 

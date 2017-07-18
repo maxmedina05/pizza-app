@@ -4,7 +4,6 @@ const DBHelper = require('../lib/db-helper')();
 module.exports = function LoginController() {
 
     function login(req, res) {
-        // res.append('WWW-Authenticate', 'Basic realm="User Visible Realm"');
         res.render('login');
     }
 

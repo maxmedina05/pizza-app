@@ -1,8 +1,9 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 const assert = require('assert');
 
 const ORDER = "orders";
-const user  = "users";
+const USER = "users";
 const OFFER = "offers";
 
 function execute(statement, params, callback) {
@@ -28,7 +29,7 @@ function getIngredients(type, db, callback) {
 }
 
 function getUser(user, db, callback) {
-    db.collection('users').findOne({
+    db.collection(USER).findOne({
             email: user.email
         },
         function(err, data) {
@@ -37,22 +38,73 @@ function getUser(user, db, callback) {
     );
 }
 
+function addUser(user, db, callback) {
+    db.collection(USER).insertOne(user, function(err, result) {
+        callback(err, result);
+    });
+}
+
+function getUsers(query, db, callback) {
+    db.collection(USER).find(query)
+        .toArray(function(err, data) {
+            callback(err, data);
+        });
+}
+
 function addOrder(order, db, callback) {
     db.collection(ORDER).insertOne(order, function(err, result) {
         callback(err, result);
     });
 }
 
+function cancelOrder(orderId, db, callback) {
+  db.collection(ORDER).findOneAndUpdate({
+          _id: ObjectId(orderId)
+      },
+      {
+        $set: { status: 'Cancelled' }
+      },
+      function(err, data) {
+          callback(err, data);
+      }
+  );
+}
+
+function updateOrder(order, db, callback) {
+
+  var newOrder = {};
+  if(order.status) {
+    newOrder.status = order.status;
+  }
+  if(order.pizza) {
+    newOrder.pizza = order.pizza;
+  }
+  if(order.price) {
+    newOrder.price = order.price;
+  }
+
+  db.collection(ORDER).findOneAndUpdate({
+          _id: ObjectId(order._id)
+      },
+      {
+        $set: newOrder
+      },
+      function(err, data) {
+          callback(err, data);
+      }
+  );
+}
+
 function getOrders(query, db, callback) {
-  db.collection(ORDER).find(query).toArray(function(err, data) {
-      callback(err, data);
-  });
+    db.collection(ORDER).find(query).toArray(function(err, data) {
+        callback(err, data);
+    });
 }
 
 function getOffers(query, db, callback) {
-  db.collection(OFFER).find(query).toArray(function(err, data) {
-      callback(err, data);
-  });
+    db.collection(OFFER).find(query).toArray(function(err, data) {
+        callback(err, data);
+    });
 }
 
 module.exports = function DBHelper() {
@@ -74,20 +126,32 @@ module.exports = function DBHelper() {
 
         // Order
         addOrder: function(order, callback) {
-          execute(addOrder, order, callback);
+            execute(addOrder, order, callback);
         },
-        getOrders: function(callback) {
-          execute(getOrders, {}, callback);
+        getOrders: function(query, callback) {
+            execute(getOrders, query, callback);
+        },
+        updateOrder: function(newOrder, callback) {
+          execute(getOrders, newOrder, callback);
         },
 
         // Offer
         getOffers: function(callback) {
-          execute(getOffers, {}, callback);
+            execute(getOffers, {}, callback);
+        },
+        cancelOrder: function(orderId, callback) {
+          execute(cancelOrder, orderId, callback);
         },
 
         // Users
         getUser: function(user, callback) {
             execute(getUser, user, callback);
+        },
+        addUser: function(user, callback) {
+            execute(addUser, user, callback);
+        },
+        getUsers: function(query, callback) {
+            execute(getUsers, query, callback);
         }
     };
 };
