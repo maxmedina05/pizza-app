@@ -51,6 +51,7 @@ function getUsers(query, db, callback) {
         });
 }
 
+// TODO: convert date to localtime
 function addOrder(order, db, callback) {
     db.collection(ORDER).insertOne(order, function(err, result) {
         callback(err, result);
@@ -73,14 +74,18 @@ function cancelOrder(orderId, db, callback) {
 function updateOrder(order, db, callback) {
 
   var newOrder = {};
-  if(order.status) {
+
+  if(order.hasOwnProperty('status')) {
     newOrder.status = order.status;
   }
-  if(order.pizza) {
+  if(order.hasOwnProperty('pizza')) {
     newOrder.pizza = order.pizza;
   }
-  if(order.price) {
+  if(order.hasOwnProperty('price')) {
     newOrder.price = order.price;
+  }
+  if(order.hasOwnProperty('cancelable')) {
+    newOrder.cancelable = order.cancelable;
   }
 
   db.collection(ORDER).findOneAndUpdate({
@@ -132,9 +137,8 @@ module.exports = function DBHelper() {
             execute(getOrders, query, callback);
         },
         updateOrder: function(newOrder, callback) {
-          execute(getOrders, newOrder, callback);
+          execute(updateOrder, newOrder, callback);
         },
-
         // Offer
         getOffers: function(callback) {
             execute(getOffers, {}, callback);
