@@ -25,3 +25,7 @@ td > .btn {
 #topping-container {
   padding: 8px 0px;
 }
+
+.text-capitalize {
+  text-transform: capitalize;
+}

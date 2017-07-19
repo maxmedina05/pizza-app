@@ -52,7 +52,7 @@ module.exports = function APIController() {
                 cheese: req.body.cheese
             };
             order.pizza = new Pizza(req.body.size, ingredients);
-            order.price = req.body.price;
+            order.price = parseFloat(req.body.price);
             order.email = UserController.getUserEmail(auth);
             order.status = 'active';
             order.cancelable = true;

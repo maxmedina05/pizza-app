@@ -40,7 +40,7 @@
                 sauce: ingredients.sauce,
                 cheese: ingredients.cheese,
                 toppings: ingredients.toppings,
-                price: parseFloat(price.innerHTML)
+                price: (price.innerHTML)
             };
 
             Ajax.post('/api/orders', order, function(res) {

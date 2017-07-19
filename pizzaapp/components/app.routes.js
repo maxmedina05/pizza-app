@@ -38,7 +38,7 @@ router.route('/orderconfirmation').post(function(req, res) {
     price += TOPPING_PRICE * x;
   }
 
-  order.totalPrice = price;
+  order.price = price;
 
   res.render('order-confirmation', {
     order: order
@@ -52,6 +52,7 @@ router.route('/ordercreated').get(function(req, res) {
 });
 
 router.route('/login').get(LoginComponent.login);
+router.route('/signup').get(LoginComponent.signup);
 router.route('/authenticate').post(LoginComponent.authenticate);
 
 module.exports = router;
