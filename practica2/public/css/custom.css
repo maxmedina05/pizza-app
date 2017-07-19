@@ -86,3 +86,83 @@
     display: block;
   }
 }
+
+/* CUSTOM HTML TREE */
+.node-container {
+  margin: 8px 0;
+}
+
+.tree ul {
+  list-style: none;
+}
+
+.tree > ul li {
+  margin: 8px 0;
+}
+
+.tree li > span {
+  color: #FFF;
+  border: 2px groove #000;
+  padding: 0 8px;
+}
+
+.xroot {
+  background-color: #9E9E9E;
+  color: #FFF;
+  border: 2px groove #000;
+  padding: 0 8px;
+}
+
+.xhtml {
+  background-color: #F44336;
+}
+
+.xhead, .xbody {
+  background-color: #E91E63;
+}
+.xul {
+  background-color: #9C27B0;
+}
+
+.xli {
+  background-color: #3F51B5;
+}
+
+.xa, .xth {
+  background-color: #FF5722;
+}
+
+.xnav, .xfooter {
+  background-color: #FFEB3B;
+}
+.xtbody {
+  background-color: #00BCD4;
+}
+
+.xsection {
+  background-color: #795548;
+}
+
+.xdiv, .xspan {
+  background-color: #4CAF50;
+}
+
+.xtable {
+  background-color: #009688;
+}
+
+.xtr {
+  background-color: #8BC34A;
+}
+
+.xtd {
+  background-color: #8BC34A;
+}
+
+.xh1, .xh2, .xh3, .xh4, .xh5, .xh6, .xmeta, .xtitle, .xlink, .xp, .xscript {
+  background-color: #607D8B;
+}
+
+.tree {
+  padding: 16px;
+}
