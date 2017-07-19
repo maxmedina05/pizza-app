@@ -55,7 +55,7 @@ module.exports = function APIController() {
             order.price = req.body.price;
             order.email = UserController.getUserEmail(auth);
             order.status = 'active';
-            order.calleable = true;
+            order.cancelable = true;
             order.created = new Date();
 
             DBHelper.addOrder(order, function(err, result) {
