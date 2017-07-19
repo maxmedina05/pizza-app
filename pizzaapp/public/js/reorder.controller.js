@@ -43,7 +43,7 @@
             btnCancel.onclick     = onCancelOrder;
 
             td.appendChild(btnOrder);
-            if(order.status === 'active') {
+            if(order.status === 'active' && order.cancelable === true) {
               td.appendChild(btnCancel);
             }
 
