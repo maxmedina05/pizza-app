@@ -29,7 +29,7 @@ router.route('/orderconfirmation').post(function(req, res) {
 
   order.size = req.body.size;
   order.crust = req.body.crust;
-  order.toppings = req.body.toppings;
+  order.toppings = req.body.toppings.split(',');
   order.sauce = req.body.sauce;
   order.cheese = req.body.cheese;
 
