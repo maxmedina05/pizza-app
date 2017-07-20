@@ -1,22 +1,16 @@
 (function() {
     'use strict';
-    var email = localStorage.getItem('email');
-    if (!email) {
-        window.location.assign('/login');
-    }
-
     document.addEventListener("DOMContentLoaded", function(event) {
         var self = this;
-        // TODO: Remove this
-        console.log("Re-Order Controller loaded!");
-
         var table = document.getElementById('reorder-table');
         var form  = document.getElementById('reorder-form');
         var orders = [];
+        var userId = localStorage.getItem('userId');
 
-        Ajax.get('/api/orders', {
-            email: email
-        }, function(orders) {
+        var url = '/api/users/' + userId + '/orders';
+
+        Ajax.get(url, {},
+          function(orders) {
             if (!orders.error) {
                 self.orders = orders;
                 for (var idx in orders) {
