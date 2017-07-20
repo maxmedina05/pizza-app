@@ -7,13 +7,10 @@ module.exports = function LoginController() {
         res.render('login');
     }
 
-<<<<<<< HEAD
-=======
     function signup(req, res) {
       res.render('signup');
     }
 
->>>>>>> dev
     function authenticate(req, res) {
         var user = {
             email: req.body.email,
@@ -46,11 +43,7 @@ module.exports = function LoginController() {
 
     return {
         login: login,
-<<<<<<< HEAD
-        authenticate: authenticate
-=======
         authenticate: authenticate,
         signup: signup
->>>>>>> dev
     }
 };
