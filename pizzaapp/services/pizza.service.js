@@ -1,13 +1,12 @@
 require('dotenv').config();
 const DbHelper = require('../lib/db-helper')();
-const Mailer    = require('./mailer.service')();
-
-// const MongoClient = require('mongodb').MongoClient;
+// const Mailer    = require('./mailer.service')();
 const INTERVAL_DELAY = 1000;
 const MINUTES_TO_SECONDS_CONSTANT = 60;
 const TIME_BEFORE_CANCEL = 2 * MINUTES_TO_SECONDS_CONSTANT;
 const TIME_BEFORE_DELIVERED_MIN = 3 * MINUTES_TO_SECONDS_CONSTANT;
 const TIME_BEFORE_DELIVERED_MAX = 5 * MINUTES_TO_SECONDS_CONSTANT;
+var intervalObject = PizzaService;
 
 function reviewOrders(err, orders) {
   if(err) {
@@ -84,8 +83,8 @@ function getRandomInt(min, max) {
 
 function PizzaService() {
   DbHelper.getOrders({status: 'active'}, reviewOrders);
+  clearInterval(intervalObject);
 }
 
-// PizzaService();
 console.log('Pizza Service started to run: ', new Date());
 setInterval(PizzaService, INTERVAL_DELAY);
