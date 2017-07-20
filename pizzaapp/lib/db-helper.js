@@ -6,6 +6,7 @@ const ORDER = "orders";
 const USER = "users";
 const OFFER = "offers";
 const PIZZA = 'pizzas';
+const MAX_LIMIT = 10;
 
 function executeOld(statement, params, callback) {
     MongoClient.connect(process.env.DB_CONN_STR, function(err, db) {
@@ -51,6 +52,10 @@ function getUser(user, db, callback) {
 
 function addUser(user, db, callback) {
     db.collection(USER).insertOne(user, callback);
+}
+
+function addPizza(pizza, db, callback) {
+    db.collection(PIZZA).insertOne(pizza, callback);
 }
 
 function getUsers(query, db, callback) {
@@ -112,13 +117,17 @@ function getOrders(query, db, callback) {
 }
 
 function getOffers(query, db, callback) {
-    db.collection(OFFER).find(query).toArray(function(err, data) {
+    db.collection(OFFER).find(query).limit(MAX_LIMIT).toArray(function(err, data) {
         callback(err, data);
     });
 }
 
 function getCollection(collection, query, db, callback) {
   db.collection(collection).find(query).toArray(callback);
+}
+
+function addItemToCollection(collection, item, db, callback) {
+  db.collection(collection).insertOne(item, callback);
 }
 
 module.exports = function DBHelper() {
@@ -173,6 +182,9 @@ module.exports = function DBHelper() {
         // Pizzas
         getPizzas: function(query, callback) {
           execute(PIZZA, getCollection, query, callback);
+        },
+        addPizza: function(pizza, callback) {
+          execute(PIZZA, addItemToCollection, pizza, callback);
         }
     };
 };
