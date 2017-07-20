@@ -16,10 +16,9 @@ module.exports = function APIController() {
     }
 
     function authenticate(req, res) {
-        // var auth = req.get('Authorization');
         var user = {
-          email: req.body.email,
-          password: req.body.password
+            email: req.body.email,
+            password: req.body.password
         }
 
         DBHelper.getUser(user, function(err, data) {
@@ -47,10 +46,10 @@ module.exports = function APIController() {
 
                             res.json({
                                 user: {
-                                  name: data.name,
-                                  email: data.email,
-                                  _id: data._id,
-                                  authorization: hash
+                                    name: data.name,
+                                    email: data.email,
+                                    _id: data._id,
+                                    authorization: hash
                                 },
                                 success: 'success'
                             });
@@ -62,7 +61,6 @@ module.exports = function APIController() {
     }
 
     function signUp(req, res) {
-
         var password = req.body.password;
 
         bcrypt.hash(password, SALT_ROUNDS, function(err, hash) {
@@ -73,7 +71,26 @@ module.exports = function APIController() {
             };
 
             DBHelper.addUser(user, function(err, data) {
-                _handleDbHelperResponse(res, err, data);
+              if (err) {
+                res.json({
+                    message: 'Ups, Something happened!',
+                    error: err
+                });
+              } else {
+                  var token = token = user.email + ':' + user.password;
+                  var hash = new Buffer(token).toString('base64');
+                  user._id = data.ops[0]._id;
+
+                  res.json({
+                      user: {
+                          name: user.name,
+                          email: user.email,
+                          _id: user._id,
+                          authorization: hash
+                      },
+                      success: 'success'
+                  });
+              }
             });
         });
     }
@@ -85,24 +102,26 @@ module.exports = function APIController() {
     }
 
     function getUserEmail(auth) {
-      if (auth) {
-          auth = auth.split(' ');
-          if (auth[1]) {
-              var hash = auth[1];
-              var tokens = new Buffer(hash, 'base64').toString('ascii').split(':');
-              var user = {
-                  email: tokens[0],
-                  password: tokens[1],
-              };
-              return user.email;
-          }
-      }
+        if (auth) {
+            auth = auth.split(' ');
+            if (auth[1]) {
+                var hash = auth[1];
+                var tokens = new Buffer(hash, 'base64').toString('ascii').split(':');
+                var user = {
+                    email: tokens[0],
+                    password: tokens[1],
+                };
+                return user.email;
+            }
+        }
     }
 
     function getUserByEmail(email, callback) {
-      DBHelper.getUser({email: email}, function(err, data) {
-        callback(err, data);
-      });
+        DBHelper.getUser({
+            email: email
+        }, function(err, data) {
+            callback(err, data);
+        });
     }
 
     function isUserAuthenticated(auth) {
