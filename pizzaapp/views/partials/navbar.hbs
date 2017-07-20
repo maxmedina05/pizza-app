@@ -15,14 +15,15 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/pizza">Pizza <span class="sr-only">(current)</span></a></li>
                 <li><a href="/deals">Deals</a></li>
-                <li><a href="/reorder">Re-order</a></li>
+                <li><a id="re-order-link" href="/reorder">Re-order</a></li>
                 <li><a href="/makepizza">Start a new order</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li id="login-link"><a href="/login">Login</a></li>
-                <li class="dropdown" id="hello-message">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, User <span class="caret"></span></a>
+                <li id="signup-link"><a href="/login">Signup</a></li>
+                <li class="dropdown" id="hello-message-dropdown">
+                    <a href="#" id="hello-message" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, User <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a id="btn-logout" >Logout</a></li>
                     </ul>
