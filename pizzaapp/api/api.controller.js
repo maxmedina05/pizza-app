@@ -2,6 +2,7 @@ const DBHelper = require('../lib/db-helper')();
 const Pizza = require('../models/pizza.model');
 const bcrypt = require('bcrypt');
 const UserController = require('./user.api.controller')();
+const Calc = require('./price-calculator');
 
 module.exports = function APIController() {
 
@@ -17,34 +18,34 @@ module.exports = function APIController() {
     }
 
     function getIngredients(req, res) {
-      var ingredients = {
-        crusts: [],
-        sauces: [],
-        cheeses: [],
-        toppings: []
-      };
+        var ingredients = {
+            crusts: [],
+            sauces: [],
+            cheeses: [],
+            toppings: []
+        };
 
-      DBHelper.getIngredients(function(err, data) {
-        for(var idx in data) {
-          var item = data[idx];
-          switch (item.type) {
-            case 'crust':
-              ingredients.crusts.push(item);
-              break;
-            case 'sauce':
-              ingredients.sauces.push(item);
-              break;
-            case 'cheese':
-              ingredients.cheeses.push(item);
-              break;
-            case 'topping':
-              ingredients.toppings.push(item);
-              break;
-          }
-        }
+        DBHelper.getIngredients(function(err, data) {
+            for (var idx in data) {
+                var item = data[idx];
+                switch (item.type) {
+                    case 'crust':
+                        ingredients.crusts.push(item);
+                        break;
+                    case 'sauce':
+                        ingredients.sauces.push(item);
+                        break;
+                    case 'cheese':
+                        ingredients.cheeses.push(item);
+                        break;
+                    case 'topping':
+                        ingredients.toppings.push(item);
+                        break;
+                }
+            }
 
-        _handleDbHelperResponse(res, err, ingredients);
-      });
+            _handleDbHelperResponse(res, err, ingredients);
+        });
     }
 
     function getCrusts(req, res) {
@@ -71,8 +72,7 @@ module.exports = function APIController() {
         });
     }
 
-    //TODO: Add Order with UserId
-    function addOrder(req, res) {
+    function addOrder(req, res, next) {
         var auth = req.get('Authorization');
         if (UserController.isUserAuthenticated(auth)) {
             var order = {};
@@ -83,20 +83,31 @@ module.exports = function APIController() {
                 cheese: req.body.cheese
             };
             order.pizza = new Pizza(req.body.size, ingredients);
-            order.price = parseFloat(req.body.price);
-            order.userId = req.body.userId;
-            order.status = 'active';
-            order.cancelable = true;
-            order.created = new Date();
-
-            DBHelper.addOrder(order, function(err, result) {
-                if (result.insertedCount === 1) {
-                    var data = {
-                        success: 'success',
-                        message: 'order was successfully added!'
-                    };
-                    _handleDbHelperResponse(res, err, data);
+            DBHelper.addPizza(order.pizza, function(err, result) {
+                if (err) {
+                    res.json({
+                        message: 'Ups, Something happened!',
+                        error: err
+                    });
+                    next();
                 }
+
+                order.price = Calc.computePrice(order.pizza);
+
+                order.userId = req.body.userId;
+                order.status = 'active';
+                order.cancelable = true;
+                order.created = new Date();
+
+                DBHelper.addOrder(order, function(err, result) {
+                    if (result.insertedCount === 1) {
+                        var data = {
+                            success: 'success',
+                            message: 'order was successfully added!'
+                        };
+                        _handleDbHelperResponse(res, err, data);
+                    }
+                });
             });
         } else {
             res.json({
@@ -108,10 +119,10 @@ module.exports = function APIController() {
 
     //TODO: Prevent users from deleting orders from orders
     function cancelOrder(req, res) {
-      var orderId = req.params.id;
-      DBHelper.cancelOrder(orderId, function(err, data) {
-          _handleDbHelperResponse(res, err, data);
-      });
+        var orderId = req.params.id;
+        DBHelper.cancelOrder(orderId, function(err, data) {
+            _handleDbHelperResponse(res, err, data);
+        });
     }
 
     function getOrders(req, res) {
@@ -128,19 +139,19 @@ module.exports = function APIController() {
     }
 
     function getPizzas(req, res) {
-      DBHelper.getPizzas({}, function(err, data) {
-          _handleDbHelperResponse(res, err, data);
-      });
+        DBHelper.getPizzas({}, function(err, data) {
+            _handleDbHelperResponse(res, err, data);
+        });
     }
 
     function getOrdersByUser(req, res) {
-      var query = {
-        userId: req.params.userId
-      }
+        var query = {
+            userId: req.params.userId
+        }
 
-      DBHelper.getOrders(query, function(err, data) {
-          _handleDbHelperResponse(res, err, data);
-      });
+        DBHelper.getOrders(query, function(err, data) {
+            _handleDbHelperResponse(res, err, data);
+        });
     }
 
     return {
