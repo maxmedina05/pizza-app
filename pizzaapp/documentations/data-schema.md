@@ -17,16 +17,28 @@
   * pizza: pizza
   * email: string
   * totalPrice: float
+<<<<<<< HEAD
   * cancellable: boolean
   * created: date
   * status: Delivered | Cancelled | Active
 
 # Offer - offers
+=======
+  * cancelable: boolean
+  * created: date
+  * status: Delivered | Cancelled | Active
+
+# Offer & Deals - offers
+>>>>>>> dev
   * pizza: Pizza
   * description: string
   * price: float
   * imageUrl: String
+<<<<<<< HEAD
 
 # Deal - deals
   * offer: offer
   * discount: random number between 10%~25%
+=======
+  * discount: string - random number between 10%~25%
+>>>>>>> dev

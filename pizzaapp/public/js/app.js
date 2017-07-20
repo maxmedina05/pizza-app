@@ -21,6 +21,9 @@
       evt.preventDefault();
       localStorage.removeItem('authorization');
       localStorage.removeItem('email');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('name');
+      
       loginLink.classList.remove("hide");
       helloMessage.className = "hide";
       location.assign('/');

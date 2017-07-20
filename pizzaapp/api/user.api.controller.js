@@ -16,6 +16,7 @@ module.exports = function APIController() {
     }
 
     function authenticate(req, res) {
+<<<<<<< HEAD
         var auth = req.get('Authorization');
         if (auth) {
             auth = auth.split(' ');
@@ -61,6 +62,51 @@ module.exports = function APIController() {
                 error: 'No Authorization header'
             });
         }
+=======
+        // var auth = req.get('Authorization');
+        var user = {
+          email: req.body.email,
+          password: req.body.password
+        }
+
+        DBHelper.getUser(user, function(err, data) {
+            if (err) {
+                res.json({
+                    message: 'Ups, Something happened!',
+                    error: err
+                });
+            } else {
+                if (!data) {
+                    res.json({
+                        failed: 'failed',
+                        errorMessage: 'User was not found!'
+                    });
+                } else {
+                    bcrypt.compare(user.password, data.password, function(err, result) {
+                        if (err) {
+                            res.json({
+                                failed: 'failed',
+                                errorMessage: 'Wrong user or password!'
+                            });
+                        } else {
+                            var token = token = data.email + ':' + data.password;
+                            var hash = new Buffer(token).toString('base64');
+                            
+                            res.json({
+                                user: {
+                                  name: data.name,
+                                  email: data.email,
+                                  _id: data._id,
+                                  authorization: hash
+                                },
+                                success: 'success'
+                            });
+                        }
+                    });
+                }
+            }
+        });
+>>>>>>> dev
     }
 
     function signUp(req, res) {

@@ -3,7 +3,11 @@ home -> make pizza -> order-confirmation -> done
 
 # order-confirmation
   receive an pizza
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> dev
 
 # Login
 home or other -> login page -> validate -> home

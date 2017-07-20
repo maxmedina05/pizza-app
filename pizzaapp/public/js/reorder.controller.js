@@ -28,8 +28,8 @@
         function addOrderToTable(container, order) {
             var row = document.createElement('tr');
             var title = '<td>' + order.pizza.title + '</td>';
-            var price = '<td>' + order.price + '</td>';
-            var status = '<td>' + order.status + '</td>';
+            var price = '<td>$' + order.price.toFixed(2) + '</td>';
+            var status = '<td class="text-capitalize">' + order.status + '</td>';
             var btnOrder = document.createElement('button');
             var btnCancel = document.createElement('button');
             var td = document.createElement('td');
@@ -43,7 +43,7 @@
             btnCancel.onclick     = onCancelOrder;
 
             td.appendChild(btnOrder);
-            if(order.status === 'active') {
+            if(order.status === 'active' && order.cancelable === true) {
               td.appendChild(btnCancel);
             }
 

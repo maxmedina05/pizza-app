@@ -1,5 +1,7 @@
 require('dotenv').config();
 const DbHelper = require('../lib/db-helper')();
+const Mailer    = require('./mailer.service')();
+
 // const MongoClient = require('mongodb').MongoClient;
 const INTERVAL_DELAY = 1000;
 const MINUTES_TO_SECONDS_CONSTANT = 60;
@@ -31,6 +33,8 @@ function reviewOrders(err, orders) {
         deliverOrder(order, function(err, result) {
           if(err) {
             console.log(err);
+          } else {
+            // Mailer.se
           }
         });
       }
@@ -80,20 +84,6 @@ function getRandomInt(min, max) {
 
 function PizzaService() {
   DbHelper.getOrders({status: 'active'}, reviewOrders);
-
-  // MongoClient.connect(process.env.DB_CONN_STR, function(err, db) {
-  //     // assert.equal(null, err);
-  //     if (err) {
-  //         console.log("Ups, Something happened!");
-  //         callback(err, []);
-  //
-  //     }
-  //     // No Errors
-  //     else {
-  //         db.collection('orders').find({status: 'active'}).toArray(reviewOrders);
-  //         db.close();
-  //     }
-  // });
 }
 
 // PizzaService();

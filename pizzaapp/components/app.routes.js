@@ -29,7 +29,11 @@ router.route('/orderconfirmation').post(function(req, res) {
 
   order.size = req.body.size;
   order.crust = req.body.crust;
+<<<<<<< HEAD
   order.toppings = req.body.toppings;
+=======
+  order.toppings = req.body.toppings.split(',');
+>>>>>>> dev
   order.sauce = req.body.sauce;
   order.cheese = req.body.cheese;
 
@@ -38,7 +42,11 @@ router.route('/orderconfirmation').post(function(req, res) {
     price += TOPPING_PRICE * x;
   }
 
+<<<<<<< HEAD
   order.totalPrice = price;
+=======
+  order.price = price;
+>>>>>>> dev
 
   res.render('order-confirmation', {
     order: order
@@ -52,6 +60,10 @@ router.route('/ordercreated').get(function(req, res) {
 });
 
 router.route('/login').get(LoginComponent.login);
+<<<<<<< HEAD
+=======
+router.route('/signup').get(LoginComponent.signup);
+>>>>>>> dev
 router.route('/authenticate').post(LoginComponent.authenticate);
 
 module.exports = router;

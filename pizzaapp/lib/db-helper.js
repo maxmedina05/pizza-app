@@ -46,9 +46,13 @@ function addUser(user, db, callback) {
 
 function getUsers(query, db, callback) {
     db.collection(USER).find(query)
+<<<<<<< HEAD
         .toArray(function(err, data) {
             callback(err, data);
         });
+=======
+        .toArray(callback);
+>>>>>>> dev
 }
 
 // TODO: convert date to localtime
