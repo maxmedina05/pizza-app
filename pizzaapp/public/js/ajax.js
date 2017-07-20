@@ -29,7 +29,7 @@ Ajax = {
         }
         xhr.send();
     },
-    post: function(url, params, callback) {
+    postOld: function(url, params, callback) {
         var xhr = new XMLHttpRequest();
         var method = 'POST';
 
@@ -44,8 +44,25 @@ Ajax = {
         if(authorization) {
           xhr.setRequestHeader("Authorization", authorization);
         }
-        // console.log(Ajax.buildHttpParams(params));
         xhr.send(Ajax.buildHttpParams(params));
+        // console.log(Ajax.buildHttpParams(params));
+    },
+    post: function(url, params, callback) {
+        var xhr = new XMLHttpRequest();
+        var method = 'POST';
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+            }
+        };
+        xhr.open(method, url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        var authorization = Ajax.getAuthorization();
+        if(authorization) {
+          xhr.setRequestHeader("Authorization", authorization);
+        }
+        xhr.send(JSON.stringify(params));
     },
     delete: function(url, callback) {
         var xhr = new XMLHttpRequest();
