@@ -40,6 +40,7 @@
                 sauce: ingredients.sauce,
                 cheese: ingredients.cheese,
                 toppings: ingredients.toppings,
+                userId: localStorage.getItem('userId'),
                 price: (price.innerHTML)
             };
 
