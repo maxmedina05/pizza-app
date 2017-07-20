@@ -20,46 +20,20 @@
             makePizzaForm.onsubmit = onsubmitOrder;
             pizzaToppingsSelect.onchange = onToppingSelect;
 
-            getIngredients('crust');
-            getIngredients('cheese');
-            getIngredients('sauce');
-            getIngredients('topping');
+            getIngredients();
 
             function getIngredients(type) {
-                var url = "/api";
-                switch (type) {
-                    case 'crust':
-                        url += "/crusts";
-                        break;
-                    case 'topping':
-                        url += "/toppings";
-                        break;
-                    case 'sauce':
-                        url += "/sauces";
-                        break;
-                    case 'cheese':
-                        url += "/cheeses";
-                        break;
-                }
+                var url = "/api/ingredients";
 
                 Ajax.get(url, '', function(response) {
                     var ingredients = response;
-                    switch (type) {
-                        case 'crust':
-                            fillIngredients(pizzaCrustsSelect, ingredients);
-                            break;
-                        case 'topping':
-                            fillIngredients(pizzaToppingsSelect, ingredients);
-                            addToppingTag(toppingContainer, ingredients[0]["name"]);
-                            addToppingTag(toppingContainer, ingredients[1]["name"]);
-                            break;
-                        case 'sauce':
-                            fillIngredients(pizzaSaucesSelect, ingredients);
-                            break;
-                        case 'cheese':
-                            fillIngredients(pizzaCheesesSelect, ingredients);
-                            break;
-                    }
+
+                    fillIngredients(pizzaCrustsSelect, ingredients.crusts);
+                    fillIngredients(pizzaToppingsSelect, ingredients.toppings);
+                    addToppingTag(toppingContainer, ingredients.toppings[0]["name"]);
+                    addToppingTag(toppingContainer, ingredients.toppings[1]["name"]);
+                    fillIngredients(pizzaSaucesSelect, ingredients.sauces);
+                    fillIngredients(pizzaCheesesSelect, ingredients.cheeses);
                 });
             }
 
@@ -70,38 +44,38 @@
             }
 
             function addNewOption(container, value) {
-              var option = document.createElement('option');
-              option.innerHTML = value;
-              option.setAttribute('value', value);
-              option.setAttribute('id', value);
-              container.appendChild(option);
+                var option = document.createElement('option');
+                option.innerHTML = value;
+                option.setAttribute('value', value);
+                option.setAttribute('id', value);
+                container.appendChild(option);
             }
 
             function addToppingTag(container, value) {
-              document.getElementById(value).remove();
-              var span = document.createElement('span');
-              span.className = 'label label-info topping';
-              span.innerHTML = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' + value;
-              container.appendChild(span);
-              toppings.push(value);
+                document.getElementById(value).remove();
+                var span = document.createElement('span');
+                span.className = 'label label-info topping';
+                span.innerHTML = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' + value;
+                container.appendChild(span);
+                toppings.push(value);
 
-              if(toppings.length > MAX_FREE_TOPPINGS) {
-                finalPrice += TOPPING_PRICE;
-                finalPriceSpan.innerHTML = finalPrice.toFixed(2);
-              }
-
-              //on x click
-              span.onclick = function() {
-                addNewOption(pizzaToppingsSelect, value);
-                toppings.splice(toppings.indexOf(value), 1);
-
-                if(toppings.length >= MAX_FREE_TOPPINGS) {
-                  finalPrice -= TOPPING_PRICE;
-                  finalPriceSpan.innerHTML = finalPrice.toFixed(2);
+                if (toppings.length > MAX_FREE_TOPPINGS) {
+                    finalPrice += TOPPING_PRICE;
+                    finalPriceSpan.innerHTML = finalPrice.toFixed(2);
                 }
 
-                span.remove();
-              };
+                //on x click
+                span.onclick = function() {
+                    addNewOption(pizzaToppingsSelect, value);
+                    toppings.splice(toppings.indexOf(value), 1);
+
+                    if (toppings.length >= MAX_FREE_TOPPINGS) {
+                        finalPrice -= TOPPING_PRICE;
+                        finalPriceSpan.innerHTML = finalPrice.toFixed(2);
+                    }
+
+                    span.remove();
+                };
             }
 
             function onsubmitOrder(evt) {
@@ -112,8 +86,8 @@
             }
 
             function onToppingSelect(evt) {
-              var topping = evt.target.value;
-              addToppingTag(toppingContainer, topping);
+                var topping = evt.target.value;
+                addToppingTag(toppingContainer, topping);
             }
         }
         MakePizzaController();

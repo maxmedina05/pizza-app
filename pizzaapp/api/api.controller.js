@@ -16,6 +16,38 @@ module.exports = function APIController() {
         }
     }
 
+    function getIngredients(req, res) {
+      var ingredients = {
+        crusts: [],
+        sauces: [],
+        cheeses: [],
+        toppings: []
+      };
+
+      DBHelper.getIngredients(function(err, data) {
+        console.log(data);
+        for(var idx in data) {
+          var item = data[idx];
+          switch (item.type) {
+            case 'crust':
+              ingredients.crusts.push(item);
+              break;
+            case 'sauce':
+              ingredients.sauces.push(item);
+              break;
+            case 'cheese':
+              ingredients.cheeses.push(item);
+              break;
+            case 'topping':
+              ingredients.toppings.push(item);
+              break;
+          }
+        }
+
+        _handleDbHelperResponse(res, err, ingredients);
+      });
+    }
+
     function getCrusts(req, res) {
         DBHelper.getCrusts(function(err, data) {
             _handleDbHelperResponse(res, err, data);
@@ -109,6 +141,8 @@ module.exports = function APIController() {
         getToppings: getToppings,
         getSauces: getSauces,
         getCheeses: getCheeses,
+        getIngredients: getIngredients,
+
         addOrder: addOrder,
         getOrders: getOrders,
         getOffers: getOffers,

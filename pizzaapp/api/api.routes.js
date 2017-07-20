@@ -7,6 +7,7 @@ router.route('/crusts').get(APIController.getCrusts);
 router.route('/toppings').get(APIController.getToppings);
 router.route('/sauces').get(APIController.getSauces);
 router.route('/cheeses').get(APIController.getCheeses);
+router.route('/ingredients').get(APIController.getIngredients);
 
 
 router.route('/authenticate').post(UserController.authenticate);

@@ -20,12 +20,8 @@ function execute(statement, params, callback) {
     });
 }
 
-function getIngredients(type, db, callback) {
-    db.collection('ingredients').find({
-        type: type
-    }).toArray(function(err, data) {
-        callback(err, data);
-    });
+function getIngredients(query, db, callback) {
+    db.collection('ingredients').find(query).toArray(callback);
 }
 
 function getUser(user, db, callback) {
@@ -115,16 +111,19 @@ module.exports = function DBHelper() {
     return {
         // Ingredients
         getCrusts: function(callback) {
-            execute(getIngredients, 'crust', callback);
+            execute(getIngredients, {type:'crust'}, callback);
         },
         getToppings: function(callback) {
-            execute(getIngredients, 'topping', callback);
+            execute(getIngredients, {type: 'topping'}, callback);
         },
         getSauces: function(callback) {
-            execute(getIngredients, 'sauce', callback);
+            execute(getIngredients, {type: 'sauce'}, callback);
         },
         getCheeses: function(callback) {
-            execute(getIngredients, 'cheese', callback);
+            execute(getIngredients, {type: 'cheese'}, callback);
+        },
+        getIngredients: function(callback) {
+          execute(getIngredients, {}, callback);
         },
 
         // Order
