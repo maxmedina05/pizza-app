@@ -2,10 +2,8 @@
   'use strict';
 
   document.addEventListener("DOMContentLoaded", function(event) {
-    // TODO: Remove this
-    console.log("Deals Controller loaded!");
     var grid = document.getElementById('deals-grid');
-    Ajax.get('/api/offers', {}, function(offers) {
+    Ajax.get('/api/deals', {}, function(offers) {
         if (!offers.error) {
             for (var idx in offers) {
                 buildOffer(grid, offers[idx]);
@@ -34,7 +32,7 @@
 
         thumbnail.innerHTML = '<img src="' + offer.imageUrl + '">';
         caption.innerHTML += '<h3>' + offer.pizza.title + '</h3>';
-        caption.innerHTML += '<p>' + offer.description + '</p>';
+        caption.innerHTML += '<p>' + offer.pizza.description + '</p>';
 
         span.innerHTML = '<span class="label label-primary"> $'+ offer.price.toFixed(2) +'</span>';
         span.appendChild(btnOrder);
@@ -53,6 +51,7 @@
               cheese: offer.pizza.ingredients.cheese,
               toppings: offer.pizza.ingredients.toppings,
               price: offer.price,
+              discount: offer.discount
           };
 
           for(var key in order) {
