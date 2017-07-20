@@ -17,7 +17,7 @@
           password: password.value
         };
 
-        Ajax.post('/api/authenticate', user, function(response) {
+        Ajax.postOld('/api/authenticate', user, function(response) {
           if (response.success == "success") {
             var user = response.user;
 
@@ -25,9 +25,10 @@
             localStorage.setItem('name', user.name);
             localStorage.setItem('email', user.email);
             localStorage.setItem('authorization', user.authorization);
+
             window.location.assign('/');
           } else {
-            Ajax.removeAuthrization();
+            
             return false;
           }
         });
