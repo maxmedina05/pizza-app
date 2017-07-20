@@ -12,7 +12,9 @@ router.route('/ingredients').get(APIController.getIngredients);
 
 router.route('/authenticate').post(UserController.authenticate);
 router.route('/signup').post(UserController.signUp);
+
 router.route('/users').get(UserController.getUsers);
+router.route('/users/:userId/orders').get(APIController.getOrdersByUser);
 
 router.route('/orders')
     .get(APIController.getOrders)
@@ -22,4 +24,5 @@ router.route('/orders/:id')
     .delete(APIController.cancelOrder);
 
 router.route('/offers').get(APIController.getOffers);
+router.route('/pizzas').get(APIController.getPizzas);
 module.exports = router;
