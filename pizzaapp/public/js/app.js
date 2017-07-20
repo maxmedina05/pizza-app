@@ -20,7 +20,7 @@
       var name = localStorage.getItem('name').split(' ');
 
       helloMessage.innerHTML = (name.length > 1) ? 'Hello, ' + name[0] : 'Hello, ' + name;
-
+      helloMessage.innerHTML += '<span class="caret"></span>';
     } else {
       loginLink.classList.remove("hide");
       signupLink.classList.remove("hide");
