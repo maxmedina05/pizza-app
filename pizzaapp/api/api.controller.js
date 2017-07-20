@@ -25,7 +25,6 @@ module.exports = function APIController() {
       };
 
       DBHelper.getIngredients(function(err, data) {
-        console.log(data);
         for(var idx in data) {
           var item = data[idx];
           switch (item.type) {
@@ -85,7 +84,7 @@ module.exports = function APIController() {
             };
             order.pizza = new Pizza(req.body.size, ingredients);
             order.price = parseFloat(req.body.price);
-            order.email = UserController.getUserEmail(auth);
+            order.userId = req.body.userId;
             order.status = 'active';
             order.cancelable = true;
             order.created = new Date();
@@ -115,17 +114,9 @@ module.exports = function APIController() {
       });
     }
 
-    // TODO: get Orders by user id
     function getOrders(req, res) {
-        var auth = req.get('Authorization');
-        var email = UserController.getUserEmail(auth);
-        var query = {};
-
-        if(email) {
-          query.email = email;
-        }
-
-        DBHelper.getOrders(query, function(err, data) {
+        // var auth = req.get('Authorization');
+        DBHelper.getOrders({}, function(err, data) {
             _handleDbHelperResponse(res, err, data);
         });
     }
@@ -136,6 +127,22 @@ module.exports = function APIController() {
         });
     }
 
+    function getPizzas(req, res) {
+      DBHelper.getPizzas({}, function(err, data) {
+          _handleDbHelperResponse(res, err, data);
+      });
+    }
+
+    function getOrdersByUser(req, res) {
+      var query = {
+        userId: req.params.userId
+      }
+
+      DBHelper.getOrders(query, function(err, data) {
+          _handleDbHelperResponse(res, err, data);
+      });
+    }
+
     return {
         getCrusts: getCrusts,
         getToppings: getToppings,
@@ -143,9 +150,12 @@ module.exports = function APIController() {
         getCheeses: getCheeses,
         getIngredients: getIngredients,
 
+        getPizzas: getPizzas,
+
         addOrder: addOrder,
         getOrders: getOrders,
         getOffers: getOffers,
-        cancelOrder: cancelOrder
+        cancelOrder: cancelOrder,
+        getOrdersByUser: getOrdersByUser
     };
 };
