@@ -26,7 +26,7 @@
             localStorage.setItem('email', user.email);
             localStorage.setItem('authorization', user.authorization);
 
-            window.location.assign('/');
+            window.location.assign('');
           } else {
 
             return false;
