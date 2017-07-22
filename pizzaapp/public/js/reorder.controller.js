@@ -7,7 +7,7 @@
         var orders = [];
         var userId = localStorage.getItem('userId');
 
-        var url = '/api/users/' + userId + '/orders';
+        var url = 'api/users/' + userId + '/orders';
 
         Ajax.get(url, {},
           function(orders) {
@@ -57,7 +57,7 @@
 
                 form.reset();
                 form.setAttribute('method', 'POST');
-                form.setAttribute('action', '/orderconfirmation');
+                form.setAttribute('action', 'orderconfirmation');
 
                 for(var key in postOrder) {
                   if(postOrder.hasOwnProperty(key)) {
@@ -74,7 +74,7 @@
 
             function onCancelOrder() {
               var orderId = order._id;
-              Ajax.delete('/api/orders/' + orderId, function(response) {
+              Ajax.delete('api/orders/' + orderId, function(response) {
                 if(response.error) {
                   // TODO: handle onCancelOrder error
                 } else {

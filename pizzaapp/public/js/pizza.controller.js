@@ -2,11 +2,8 @@
     'use strict';
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        // TODO: Remove this
-        console.log("PizzaController Ready!");
-
         var pizzaGrid = document.getElementById('pizza-grid');
-        Ajax.get('/api/offers', {}, function(offers) {
+        Ajax.get('api/offers', {}, function(offers) {
             if (!offers.error) {
                 for (var idx in offers) {
                     buildOffer(pizzaGrid, offers[idx]);
@@ -22,7 +19,7 @@
             var form = document.createElement('form');
 
             form.setAttribute('method', 'POST');
-            form.setAttribute('action', '/orderconfirmation');
+            form.setAttribute('action', 'orderconfirmation');
 
             card.className = "col-sm-6 col-md-4";
             thumbnail.className = 'thumbnail';

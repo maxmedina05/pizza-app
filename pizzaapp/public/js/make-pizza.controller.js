@@ -23,7 +23,7 @@
             getIngredients();
 
             function getIngredients(type) {
-                var url = "/api/ingredients";
+                var url = "api/ingredients";
 
                 Ajax.get(url, '', function(response) {
                     var ingredients = response;

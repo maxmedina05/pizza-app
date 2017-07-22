@@ -17,7 +17,7 @@
           password: password.value
         };
 
-        Ajax.postOld('/api/authenticate', user, function(response) {
+        Ajax.postOld('api/authenticate', user, function(response) {
           if (response.success == "success") {
             var user = response.user;
 
@@ -28,7 +28,7 @@
 
             window.location.assign('/');
           } else {
-            
+
             return false;
           }
         });

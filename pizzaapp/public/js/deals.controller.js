@@ -3,7 +3,7 @@
 
   document.addEventListener("DOMContentLoaded", function(event) {
     var grid = document.getElementById('deals-grid');
-    Ajax.get('/api/deals', {}, function(offers) {
+    Ajax.get('api/deals', {}, function(offers) {
         if (!offers.error) {
             for (var idx in offers) {
                 buildOffer(grid, offers[idx]);
@@ -20,7 +20,7 @@
         var span = document.createElement('span');
 
         form.setAttribute('method', 'POST');
-        form.setAttribute('action', '/orderconfirmation');
+        form.setAttribute('action', 'orderconfirmation');
 
         card.className = "col-sm-6 col-md-4";
         thumbnail.className = 'thumbnail';

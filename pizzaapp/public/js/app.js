@@ -25,7 +25,7 @@
       loginLink.classList.remove("hide");
       signupLink.classList.remove("hide");
       helloMsgDropdown.className = "hide";
-      reOrderLink.setAttribute('href', '/login');
+      reOrderLink.setAttribute('href', 'login');
     }
 
     function logout(evt){
@@ -37,7 +37,7 @@
 
       loginLink.classList.remove("hide");
       helloMsgDropdown.className = "hide";
-      location.assign('/');
+      location.assign('');
     }
 
     function isUserLogged(){
