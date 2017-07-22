@@ -2,16 +2,14 @@
 
 db.users.insert({
   email: "admin@example.com",
-  username: 'admin',
+  name: 'Admin',
   password: 'admin',
-  role: 'admin'
   });
 
   db.users.insert({
     email: "test@example.com",
-    username: 'test',
+    name: 'Test',
     password: 'test',
-    role: 'guest'
     });
 
 db.pizzas.insert([
