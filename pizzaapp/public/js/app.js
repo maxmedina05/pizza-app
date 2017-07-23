@@ -1,7 +1,7 @@
 'use strict';
 
 var app = {
-  loginModule: {}
+    loginModule: {}
 };
 
 (function() {
@@ -14,11 +14,16 @@ var app = {
         var btnLogout = document.getElementById('btn-logout');
         var reOrderLink = document.getElementById('re-order-link');
         var messageContainer = document.getElementById('message-container');
+        var navbarItemPizza = document.getElementById("navbar-item-pizza");
+        var navbarItemDeals = document.getElementById("navbar-item-deals");
+        var navbarItemReorder = document.getElementById("navbar-item-reorder");
+        var navbarItemMake = document.getElementById("navbar-item-make");
 
         btnLogout.onclick = logout;
 
         app.loginModule.isUserLogged = isUserLogged;
         app.showErrorMessage = showErrorMessage;
+        markActiveView();
 
         if (isUserLogged()) {
             loginLink.className = "hide";
@@ -35,6 +40,9 @@ var app = {
             helloMsgDropdown.className = "hide";
             reOrderLink.setAttribute('href', 'login');
         }
+
+        // End of main
+        // function definitions
 
         function logout(evt) {
             evt.preventDefault();
@@ -54,23 +62,48 @@ var app = {
         }
 
         function showErrorMessage(errorMessage) {
-          var alertMsg = document.createElement('div');
-          var btn = document.createElement('button');
-          var span = document.createElement('span');
+            var alertMsg = document.createElement('div');
+            var btn = document.createElement('button');
+            var span = document.createElement('span');
 
-          alertMsg.className = 'alert alert-danger alert-dismissible"';
-          alertMsg.setAttribute('role', 'alert');
+            alertMsg.className = 'alert alert-danger alert-dismissible"';
+            alertMsg.setAttribute('role', 'alert');
 
-          btn.className = 'close';
-          btn.setAttribute('data-dismiss', 'alert');
-          btn.setAttribute('aria-label', 'Close');
-          btn.innerHTML = '<span aria-hidden="true">&times;</span>';
+            btn.className = 'close';
+            btn.setAttribute('data-dismiss', 'alert');
+            btn.setAttribute('aria-label', 'Close');
+            btn.innerHTML = '<span aria-hidden="true">&times;</span>';
 
-          span.innerHTML = '<strong>Warning!</strong> ' + errorMessage;
+            span.innerHTML = '<strong>Warning!</strong> ' + errorMessage;
 
-          alertMsg.appendChild(btn);
-          alertMsg.appendChild(span);
-          messageContainer.appendChild(alertMsg);
+            alertMsg.appendChild(btn);
+            alertMsg.appendChild(span);
+            messageContainer.appendChild(alertMsg);
+        }
+
+        function markActiveView() {
+            var path = location.pathname.split('/');
+            path.shift();
+
+            if (path[0] == 'max') {
+                path.shift();
+            }
+            switch (path[0]) {
+                case "pizza":
+                    navbarItemPizza.className = 'active';
+                    break;
+                case "deals":
+                    navbarItemDeals.className = 'active';
+                    break;
+                case "reorder":
+                    navbarItemReorder.className = 'active';
+                    break;
+                case "make":
+                    navbarItemMake.className = 'active';
+                    break;
+                default:
+            }
+
         }
     });
 })();
