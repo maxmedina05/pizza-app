@@ -58,6 +58,11 @@
                 }
               }
 
+              if(!app.loginModule.isUserLogged()) {
+                location.assign('login');
+                return false;
+              }
+
               form.submit();
             }
         }

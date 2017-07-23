@@ -92,7 +92,12 @@ module.exports = function APIController() {
                     next();
                 }
 
-                order.price = Calc.computePrice(order.pizza);
+                if(req.body.hasDiscount) {
+                  order.price = parseFloat(req.body.price);
+                } else {
+
+                  order.price = Calc.computePrice(order.pizza);
+                }
 
                 order.userId = req.body.userId;
                 order.status = 'active';

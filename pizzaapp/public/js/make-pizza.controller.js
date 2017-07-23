@@ -81,8 +81,14 @@
             function onsubmitOrder(evt) {
                 var toppingField = document.getElementById('toppings');
                 toppingField.setAttribute('value', toppings.join());
+
+                if(!app.loginModule.isUserLogged()) {
+                  evt.preventDefault();
+                  location.assign('login');
+                  return false;
+                }
+
                 return true;
-                // evt.preventDefault();
             }
 
             function onToppingSelect(evt) {

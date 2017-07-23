@@ -51,7 +51,7 @@
               cheese: offer.pizza.ingredients.cheese,
               toppings: offer.pizza.ingredients.toppings,
               price: offer.price,
-              discount: offer.discount
+              hasDiscount: true,
           };
 
           for(var key in order) {
@@ -64,6 +64,10 @@
             }
           }
 
+          if(!app.loginModule.isUserLogged()) {
+            location.assign('login');
+            return false;
+          }
           form.submit();
         }
     }

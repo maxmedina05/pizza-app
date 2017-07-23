@@ -41,9 +41,11 @@ function getIngredients(query, db, callback) {
 }
 
 function getUser(user, db, callback) {
-    db.collection(USER).findOne({
-            email: user.email
-        },
+    if(user && user.hasOwnProperty('_id')) {
+      user._id = ObjectId(user._id);
+    }
+    db.collection(USER).findOne(
+        user,
         function(err, data) {
             callback(err, data);
         }

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const DbHelper = require('../lib/db-helper')();
-// const Mailer    = require('./mailer.service')();
+const Mailer = require('./mailer.service')();
 const INTERVAL_DELAY = 1000;
 const MINUTES_TO_SECONDS_CONSTANT = 60;
 const TIME_BEFORE_CANCEL = 2 * MINUTES_TO_SECONDS_CONSTANT;
@@ -9,61 +9,66 @@ const TIME_BEFORE_DELIVERED_MAX = 5 * MINUTES_TO_SECONDS_CONSTANT;
 var intervalObject = PizzaService;
 
 function reviewOrders(err, orders) {
-  if(err) {
-    return false;
-  } else {
-    for(var idx in orders) {
-      var order = orders[idx];
-      var deltaTime = getCurrentTimeSeconds() -  toSeconds(new Date(order.created));
-      if(order.cancelable && (deltaTime > TIME_BEFORE_CANCEL)) {
-        // console.log("can't cancel anymore");
-        makeOrderNotCancelable(order, function(err, result) {
-          if(err) {
-            console.log(err);
-          }
-        });
-      }
-
-      // console.log(timeBeforeDelivered);
-      // console.log("deltaTime: ", deltaTime);
-      var timeBeforeDelivered = computeTimeBeforeDelivered();
-      if((order.cancelable === false) && (deltaTime >= timeBeforeDelivered)) {
-        // console.log('order was delivered');
-        deliverOrder(order, function(err, result) {
-          if(err) {
-            console.log(err);
-          } else {
-            // Mailer.se
-          }
-        });
-      }
+    if (err) {
+        return false;
     }
-  }
+
+    for (var idx in orders) {
+        var order = orders[idx];
+        var deltaTime = getCurrentTimeSeconds() - toSeconds(new Date(order.created));
+        if (order.cancelable && (deltaTime > TIME_BEFORE_CANCEL)) {
+            makeOrderNotCancelable(order, function(err, result) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        var timeBeforeDelivered = computeTimeBeforeDelivered();
+        if ((order.cancelable === false) && (deltaTime >= timeBeforeDelivered)) {
+            deliverOrder(order, function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    sendDeliveredMail(order);
+                }
+            });
+        }
+    }
+
+}
+
+function sendDeliveredMail(order) {
+  DbHelper.getUser(
+    {_id: order.userId}, function(err, user) {
+        Mailer.sendDeliveredMail(user, order);
+    }
+  );
 }
 
 function deliverOrder(order, callback) {
-  var newOrder = {
-    _id: order._id,
-    status: 'delivered'
-  };
-  DbHelper.updateOrder(newOrder, callback);
+    var newOrder = {
+        _id: order._id,
+        status: 'delivered'
+    };
+    DbHelper.updateOrder(newOrder, callback);
 }
 
 function makeOrderNotCancelable(order, callback) {
-  var newOrder = {
-    _id: order._id,
-    cancelable: false
-  };
-  DbHelper.updateOrder(newOrder, callback);
+    var newOrder = {
+        _id: order._id,
+        cancelable: false
+    };
+    DbHelper.updateOrder(newOrder, callback);
 }
 
 function getCurrentTimeSeconds() {
-  var time = new Date().getTime() / 1000;
-  return time;
+    var time = new Date().getTime() / 1000;
+    return time;
 }
 
 function toSeconds(date) {
-  return date.getTime() / 1000;
+    return date.getTime() / 1000;
 }
 
 function computeTimeBeforeDelivered() {
@@ -72,18 +77,20 @@ function computeTimeBeforeDelivered() {
 }
 
 function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
+    return Math.random() * (max - min) + min;
 }
 
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 function PizzaService() {
-  DbHelper.getOrders({status: 'active'}, reviewOrders);
-  clearInterval(intervalObject);
+    DbHelper.getOrders({
+        status: 'active'
+    }, reviewOrders);
+    clearInterval(intervalObject);
 }
 
 console.log('Pizza Service started to run: ', new Date());

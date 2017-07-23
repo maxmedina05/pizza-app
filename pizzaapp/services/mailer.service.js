@@ -11,7 +11,7 @@ module.exports = function() {
       pass: 'P@ssword2017'
     }
   });
-  
+
   function sendDeliveredMail(user, order) {
     var params = {
       from: 'el.pequeno.cesar.webapp@gmail.com',

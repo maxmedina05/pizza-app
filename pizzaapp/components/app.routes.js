@@ -32,13 +32,20 @@ router.route('/orderconfirmation').post(function(req, res) {
     order.toppings = req.body.toppings.split(',');
     order.sauce = req.body.sauce;
     order.cheese = req.body.cheese;
+    order.hasDiscount = req.body.hasDiscount;
 
     if (order.toppings.length > MAX_FREE_TOPPINGS) {
         var x = order.toppings.length - MAX_FREE_TOPPINGS;
         price += TOPPING_PRICE * x;
     }
 
-    order.price = price.toFixed(2);
+    if (order.hasDiscount) {
+      order.price = parseFloat(req.body.price);
+    } else {
+        order.price = price;
+    }
+
+    order.price = order.price.toFixed(2);
 
     res.render('order-confirmation', {
         order: order
@@ -53,6 +60,5 @@ router.route('/ordercreated').get(function(req, res) {
 
 router.route('/login').get(LoginComponent.login);
 router.route('/signup').get(LoginComponent.signup);
-router.route('/authenticate').post(LoginComponent.authenticate);
 
 module.exports = router;

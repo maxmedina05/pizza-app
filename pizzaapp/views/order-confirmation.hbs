@@ -33,7 +33,9 @@
         </tr>
         <tr>
             <td><strong>Total Price</strong></td>
-            <td >$<span id="order-price">{{order.price}}</span></td>
+            <td >$<span id="order-price">{{order.price}}</span>
+              <input  type="hidden" id="order-discount" value="{{order.hasDiscount}}"/>
+            </td>
         </tr>
     </table>
 

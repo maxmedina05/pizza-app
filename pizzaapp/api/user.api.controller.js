@@ -16,10 +16,12 @@ module.exports = function APIController() {
     }
 
     function authenticate(req, res) {
+
         var user = {
             email: req.body.email,
-            password: req.body.password
-        }
+            // password: req.body.password
+        };
+        var password = req.body.password;
 
         DBHelper.getUser(user, function(err, data) {
             if (err) {
@@ -34,7 +36,7 @@ module.exports = function APIController() {
                         errorMessage: 'User was not found!'
                     });
                 } else {
-                    bcrypt.compare(user.password, data.password, function(err, result) {
+                    bcrypt.compare(password, data.password, function(err, result) {
                         if (err) {
                             res.json({
                                 failed: 'failed',

@@ -8,6 +8,7 @@
         var cheese = document.getElementById('order-cheese');
         var toppings = document.getElementById('order-toppings');
         var price = document.getElementById('order-price');
+        var hasDiscount = document.getElementById('order-discount');
 
         var btnConfirm = document.getElementById('btn-confirm');
         var btnCancel = document.getElementById('btn-cancel');
@@ -41,8 +42,10 @@
                 cheese: ingredients.cheese,
                 toppings: ingredients.toppings,
                 userId: localStorage.getItem('userId'),
-                price: (price.innerHTML)
+                price: (price.innerHTML),
+                hasDiscount: (hasDiscount.value == 'true')
             };
+            // return false;
 
             Ajax.post('api/orders', order, function(res) {
               if(res.success) {
