@@ -5,9 +5,8 @@ function Pizza(size, ingredients) {
   this.title = buildTitle(size, ingredients);
   this.description = buildDescription(size, ingredients);
 
-  this.buildTitle = buildTitle;
-  this.buildDescription = buildDescription;
-
+  // this.buildTitle = buildTitle;
+  // this.buildDescription = buildDescription;
   return this;
 
   function buildTitle(size, ingredients) {

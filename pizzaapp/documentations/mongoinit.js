@@ -149,21 +149,48 @@ db.pizzas.insert([
 
 db.offers.insert([
   {
-    pizza: {title: 'Large mozzarella, pepperoni and pineapple pizza with thin crust', size: 'Large', ingredients: {crust: 'Thin', sauce:'Bechamel', cheese: 'Mozzarella', toppings: ['Pepperoni', 'Pineapple']}},
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    price: 10.00,
-    imageUrl: 'http://lorempizza.com/242/200'
-  },
-  {
-    pizza:   {title: 'Large ricotta, pepperoni and mushrooms pizza with flatbread crust', size: 'Large', ingredients: {crust: 'Flatbread', sauce:'Pesto', cheese: 'Ricotta', toppings: ['Pepperoni', 'Mushrooms']}},
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    price: 10.00,
-    imageUrl: 'http://lorempizza.com/242/200'
-  },
-  {
-    pizza:   {title: 'Large buffao mozzarella, pepperoni and bacon pizza with thin crust', size: 'Large', ingredients: {crust: 'Thin', sauce:'Bechamel', cheese: 'Buffalo mozzarella', toppings: ['Pepperoni', 'Bacon']}},
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    price: 10.00,
-    imageUrl: 'http://lorempizza.com/242/200'
-  },
+        pizza: {
+            title: "Large Mozzarella, Pepperoni,Pineapple pizza with Flatbread crust",
+            description: 'This pizza has: \n\tSize: Large\n\tCrust: Flatbread\n\tSauce: Bechamel\n\tCheese: Mozzarella\n\tToppings: Pepperoni,Pineapple',
+            size: 'Large',
+            ingredients: {
+                crust: 'Flatbread',
+                sauce: 'Bechamel',
+                cheese: 'Mozzarella',
+                toppings: ['Pepperoni', 'Pineapple']
+            }
+        },
+        price: 10,
+        imageUrl: 'http://lorempizza.com/242/200'
+    },
+    {
+        pizza: {
+            title: "Large Mozzarella, Pepperoni,Banco pizza with Thin crust",
+            description: 'This pizza has: \n\tSize: Large\n\tCrust: Thin\n\tSauce: Bechamel\n\tCheese: Mozzarella\n\tToppings: Pepperoni,Bacon',
+            size: 'Large',
+            ingredients: {
+                crust: 'Thin',
+                sauce: 'Bechamel',
+                cheese: 'Mozzarella',
+                toppings: ['Pepperoni', 'Bacon']
+            }
+        },
+        price: 10,
+        imageUrl: 'http://lorempizza.com/242/200'
+    },
+    {
+        pizza: {
+            title: "Large Queso, Pepperoni, pizza with Thin crust",
+            description: 'This pizza has: \n\tSize: Large\n\tCrust: Thin\n\tSauce: Bechamel\n\tCheese: Queso\n\tToppings: Pepperoni',
+            size: 'Large',
+            ingredients: {
+                crust: 'Thin',
+                sauce: 'Bechamel',
+                cheese: 'Queso',
+                toppings: ['Pepperoni']
+            }
+        },
+        price: 10,
+        imageUrl: 'http://lorempizza.com/242/200'
+    }
 ])

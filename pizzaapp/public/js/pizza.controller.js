@@ -31,7 +31,7 @@
 
             thumbnail.innerHTML = '<img src="' + offer.imageUrl + '">';
             caption.innerHTML += '<h4>' + offer.pizza.title + '</h4>';
-            caption.innerHTML += '<p>' + offer.description + '</p>';
+            caption.innerHTML += '<p>' + offer.pizza.description + '</p>';
             caption.appendChild(btnOrder);
             thumbnail.appendChild(caption);
             card.appendChild(thumbnail);

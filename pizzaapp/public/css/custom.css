@@ -1,6 +1,7 @@
-.body {
+body {
   /*margin-top: 64px;*/
   /*margin-bottom: 32px;*/
+    background-color: #F5F5F5;
 }
 
 .thumbnail > img {
@@ -33,9 +34,10 @@ td > .btn {
 .card {
   border: 1px #BDBDBD solid;
   border-radius: 6px;
-  padding: 8px 32px;
+  padding: 16px 32px;
   box-shadow: 2px 2px 12px #888888;
   margin-bottom: 8px;
+  background-color: #FFF;
 }
 
 .btn-primary {
