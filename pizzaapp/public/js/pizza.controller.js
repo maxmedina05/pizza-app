@@ -30,7 +30,7 @@
             btnOrder.onclick = onOrderNowClick;
 
             thumbnail.innerHTML = '<img src="' + offer.imageUrl + '">';
-            caption.innerHTML += '<h3>' + offer.pizza.title + '</h3>';
+            caption.innerHTML += '<h4>' + offer.pizza.title + '</h4>';
             caption.innerHTML += '<p>' + offer.description + '</p>';
             caption.appendChild(btnOrder);
             thumbnail.appendChild(caption);

@@ -31,7 +31,7 @@
         btnOrder.onclick = onOrderNowClick;
 
         thumbnail.innerHTML = '<img src="' + offer.imageUrl + '">';
-        caption.innerHTML += '<h3>' + offer.pizza.title + '</h3>';
+        caption.innerHTML += '<h4>' + offer.pizza.title + '</h4>';
         caption.innerHTML += '<p>' + offer.pizza.description + '</p>';
 
         span.innerHTML = '<span class="label label-primary"> $'+ offer.price.toFixed(2) +'</span>';
