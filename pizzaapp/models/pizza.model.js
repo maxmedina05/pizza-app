@@ -1,3 +1,5 @@
+const util = require('util');
+
 function Pizza(size, ingredients) {
   this.size = size;
   this.ingredients = ingredients;
@@ -14,14 +16,19 @@ function Pizza(size, ingredients) {
   }
 
   function buildDescription(size, ingredients) {
-    var content = 'This pizza has: \n\n';
-    content += 'Size: ' +  size + '\n';
-    content += 'Crust: ' +  ingredients.crust + '\n';
-    content += 'Sauce: ' +  ingredients.sauce + '\n';
-    content += 'Cheese: ' +  ingredients.cheese + '\n';
-    content += 'Toppings: ' +  ingredients.toppings + '\n';
+
+    var content = util.format('This is a %s pizza with %s crust cover with a delicious %s plus %s cheese and %s as toppings.',
+     size, ingredients.crust, ingredients.sauce, ingredients.cheese, ingredients.toppings);
+
     return content;
   }
+
+  // function buildDescription(size, ingredients) {
+  //
+  //   var content = 'This is a '+ size + ' pizza with '+ ingredients.crust +' crust cover with a delicious '+ ingredients.sauce
+  //   +' plus ' + ingredients.cheese +  ' cheese and '+ ingredients.toppings +' as toppings.';
+  //   return content;
+  // }
 }
 
 module.exports = Pizza;

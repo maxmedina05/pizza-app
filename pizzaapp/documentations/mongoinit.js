@@ -151,7 +151,7 @@ db.offers.insert([
   {
         pizza: {
             title: "Large Mozzarella, Pepperoni,Pineapple pizza with Flatbread crust",
-            description: 'This pizza has: \n\tSize: Large\n\tCrust: Flatbread\n\tSauce: Bechamel\n\tCheese: Mozzarella\n\tToppings: Pepperoni,Pineapple',
+            description: "This is a Large pizza with Thin crust cover with a delicious Bechamel plus Mozzarella cheese and Pepperoni,Pineapple as toppings.",
             size: 'Large',
             ingredients: {
                 crust: 'Flatbread',
@@ -166,7 +166,7 @@ db.offers.insert([
     {
         pizza: {
             title: "Large Mozzarella, Pepperoni,Banco pizza with Thin crust",
-            description: 'This pizza has: \n\tSize: Large\n\tCrust: Thin\n\tSauce: Bechamel\n\tCheese: Mozzarella\n\tToppings: Pepperoni,Bacon',
+            description: "This is a Large pizza with Thin crust cover with a delicious Bechamel plus Mozzarella cheese and Pepperoni,Bacon as toppings.",
             size: 'Large',
             ingredients: {
                 crust: 'Thin',
@@ -181,7 +181,7 @@ db.offers.insert([
     {
         pizza: {
             title: "Large Queso, Pepperoni, pizza with Thin crust",
-            description: 'This pizza has: \n\tSize: Large\n\tCrust: Thin\n\tSauce: Bechamel\n\tCheese: Queso\n\tToppings: Pepperoni',
+            description: "This is a Large pizza with Thin crust cover with a delicious Bechamel plus Queso cheese and Pepperoni as toppings.",
             size: 'Large',
             ingredients: {
                 crust: 'Thin',
