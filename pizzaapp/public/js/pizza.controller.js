@@ -26,7 +26,7 @@
             caption.className = 'caption';
 
             btnOrder.innerHTML = "Order Now";
-            btnOrder.className = "btn btn-warning";
+            btnOrder.className = "btn btn-primary card-btn";
             btnOrder.onclick = onOrderNowClick;
 
             thumbnail.innerHTML = '<img src="' + offer.imageUrl + '">';

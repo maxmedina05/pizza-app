@@ -27,14 +27,14 @@
         caption.className = 'caption';
 
         btnOrder.innerHTML = "Order Now";
-        btnOrder.className = "btn btn-warning pull-right";
+        btnOrder.className = "btn btn-primary pull-right";
         btnOrder.onclick = onOrderNowClick;
 
         thumbnail.innerHTML = '<img src="' + offer.imageUrl + '">';
         caption.innerHTML += '<h4>' + offer.pizza.title + '</h4>';
         caption.innerHTML += '<p>' + offer.pizza.description + '</p>';
 
-        span.innerHTML = '<span class="label label-warning"> $'+ offer.price.toFixed(2) +'</span>';
+        span.innerHTML = '<span class="label label-primary"> $'+ offer.price.toFixed(2) +'</span>';
         span.appendChild(btnOrder);
 
         caption.appendChild(span);

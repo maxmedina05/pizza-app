@@ -1,74 +1,74 @@
 <div class="col-lg-8">
-  <div class="card">
-    <h3>Make your own Pizza</h3>
+    <div class="card">
+        <h3>Make your own Pizza</h3>
 
-    <form class="form-horizontal" action="orderconfirmation" method="post" id="make-pizza-form">
-      <fieldset>
-        <div class="form-group">
-          <label class="col-md-2 control-label" for="pizza-size">Select your pizza's size</label>
-          <div class="col-md-10">
-            <select id="pizza-size" name="size" class="form-control">
-              <option>Personal</option>
-              <option>Medium</option>
-              <option selected>Large</option>
-              <option>Extra Large</option>
-            </select>
-          </div>
-        </div>
+        <form class="form-horizontal" action="orderconfirmation" method="post" id="make-pizza-form">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="pizza-size">Select your pizza's size</label>
+                    <div class="col-md-10">
+                        <select id="pizza-size" name="size" class="form-control">
+                                  <option>Personal</option>
+                                  <option>Medium</option>
+                                  <option selected>Large</option>
+                                  <option>Extra Large</option>
+                        </select>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="col-md-2 control-label" for="pizza-crust">Select your pizza's crust</label>
-          <div class="col-md-10">
-            <select id="pizza-crust" name="crust" class="form-control">
-            </select>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="pizza-crust">Select your pizza's crust</label>
+                    <div class="col-md-10">
+                        <select id="pizza-crust" name="crust" class="form-control">
+                        </select>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="col-md-2 control-label" for="pizza-cheese">Select your pizza's cheese</label>
-          <div class="col-md-10">
-            <select id="pizza-cheese" name="cheese" class="form-control">
-            </select>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="pizza-cheese">Select your pizza's cheese</label>
+                    <div class="col-md-10">
+                        <select id="pizza-cheese" name="cheese" class="form-control">
+                        </select>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="col-md-2 control-label" for="pizza-sauce">Select your pizza's sauce</label>
-          <div class="col-md-10">
-            <select id="pizza-sauce" name="sauce" class="form-control">
-            </select>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="pizza-sauce">Select your pizza's sauce</label>
+                    <div class="col-md-10">
+                        <select id="pizza-sauce" name="sauce" class="form-control">
+                        </select>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="col-md-2 control-label" for="pizza-topping">Select your pizza's topping</label>
-          <div class="col-md-10">
-            <select id="pizza-topping" class="form-control">
-            </select>
-            <input type="hidden" id="toppings" name="toppings" />
-            <div id="topping-container">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="pizza-topping">Select your pizza's topping</label>
+                    <div class="col-md-10">
+                        <select id="pizza-topping" class="form-control">
+                          <option selected disabled>Please select your favourite topping</option>
+                        </select>
+                        <input type="hidden" id="toppings" name="toppings" />
+                        <div id="topping-container">
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <!-- <button type="reset" class="btn btn-default">Cancel</button> -->
+                    <button id="btnSubmit" type="submit" class="btn btn-primary pull-right">Submit Order</button>
+                    <a href="pizza" class="btn btn-default pull-right">Cancel</a>
+                </div>
             </div>
+        </form>
+    </div>
+    <script src="static/js/make-pizza.controller.js"></script>
+</div>
 
-          </div>
-        </div>
-      </fieldset>
-
-      <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
-          <!-- <button type="reset" class="btn btn-default">Cancel</button> -->
-          <button id="btnSubmit" type="submit" class="btn btn-primary pull-right">Submit Order</button>
-          <a href="pizza" class="btn btn-default pull-right">Cancel</a>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div class="card">
-    <h3>Price</h3>
-    <div>Base Price: $ <span>10.00</span></div>
-    <div>Total Price: $ <span id="final-price">10.00</span></div>
-  </div>
-
-  <script src="static/js/make-pizza.controller.js"></script>
-
+<div class="col-lg-3">
+    <div class="card">
+        <h3>Price <span class="pull-right label label-primary">$<span id="final-price">10.00</span></span></h3>
+        <div>Base Price: $ <span>10.00</span></div>
+    </div>
 </div>

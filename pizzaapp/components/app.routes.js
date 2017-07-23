@@ -7,6 +7,10 @@ router.route('/pizza').get(function(req, res) {
     res.render('pizza');
 });
 
+router.route('/about').get(function(req, res) {
+    res.render('about');
+});
+
 router.route('/makepizza').get(function(req, res) {
     res.render('make-pizza');
 });

@@ -29,11 +29,11 @@
             var td = document.createElement('td');
 
             btnOrder.innerHTML    = 'Order again';
-            btnOrder.className    = 'btn btn-warning';
+            btnOrder.className    = 'btn btn-primary';
             btnOrder.onclick      = onOrderNowClick;
 
             btnCancel.innerHTML   = 'Cancel';
-            btnCancel.className   = 'btn btn-danger';
+            btnCancel.className   = 'btn btn-default';
             btnCancel.onclick     = onCancelOrder;
 
             td.appendChild(btnOrder);

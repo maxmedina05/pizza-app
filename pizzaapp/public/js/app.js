@@ -18,6 +18,11 @@ var app = {
         var navbarItemDeals = document.getElementById("navbar-item-deals");
         var navbarItemReorder = document.getElementById("navbar-item-reorder");
         var navbarItemMake = document.getElementById("navbar-item-make");
+        var btnOrderCreatedCloseAlert = document.getElementById('order-created-close');
+
+        if(btnOrderCreatedCloseAlert) {
+          btnOrderCreatedCloseAlert.onclick = onAlertClose;
+        }
 
         btnLogout.onclick = logout;
 
@@ -103,7 +108,10 @@ var app = {
                     break;
                 default:
             }
+        }
 
+        function onAlertClose(){
+          location.assign('pizza');
         }
     });
 })();

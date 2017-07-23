@@ -49,6 +49,7 @@
                 option.setAttribute('value', value);
                 option.setAttribute('id', value);
                 container.appendChild(option);
+
             }
 
             function addToppingTag(container, value) {
@@ -94,6 +95,7 @@
             function onToppingSelect(evt) {
                 var topping = evt.target.value;
                 addToppingTag(toppingContainer, topping);
+                pizzaToppingsSelect.selectedIndex = 0;
             }
         }
         MakePizzaController();
